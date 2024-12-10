@@ -1,6 +1,6 @@
 # YRGOPELAGO Assignment
 ## NEEDS:
-    - [ ] Create an island. Pick from your own imagination or check out a list of fictional islands
+- [ ] Create an island. Pick from your own imagination or check out a list of fictional islands
     - [ ]Find a name for your hotel.
     - [ ]Setup a subdomain for your site, preferably on your one.com-account.
     - [ ]Use your startcode at the central bank of Yrgopelago to get your own, secret and extremly valuable API_KEY. Please keep it in the .env in your project.
