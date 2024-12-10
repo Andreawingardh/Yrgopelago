@@ -1,12 +1,12 @@
 # YRGOPELAGO Assignment
 ## NEEDS:
 - [ ] Create an island. Pick from your own imagination or check out a list of fictional islands
-    - [ ]Find a name for your hotel.
-    - [ ]Setup a subdomain for your site, preferably on your one.com-account.
-    - [ ]Use your startcode at the central bank of Yrgopelago to get your own, secret and extremly valuable API_KEY. Please keep it in the .env in your project.
-    - [ ]Build a tiny website or just a web page for your hotel (see requirements below)
-    - [ ]Register your island and hotel at the central bank of yrgopelago using your API_KEY
-    - [ ]Create a database for your hotel, so that you can store information about your visitors arrival and departure date, which room they will be staying in and such information.
+- [ ] Find a name for your hotel.
+- [ ] Setup a subdomain for your site, preferably on your one.com-account.
+- [ ] Use your startcode at the central bank of Yrgopelago to get your own, secret and extremly valuable API_KEY. Please keep it in the .env in your project.
+- [ ] Build a tiny website or just a web page for your hotel (see requirements below)
+- [ ] Register your island and hotel at the central bank of yrgopelago using your API_KEY
+- [ ] Create a database for your hotel, so that you can store information about your visitors arrival and departure date, which room they will be staying in and such information.
 
 ## REQUIREMENTS:
 Below you'll find a list of requirements which need to be fulfilled in order to complete the project.
