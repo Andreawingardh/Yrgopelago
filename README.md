@@ -31,11 +31,11 @@ Below you'll find a list of requirements which need to be fulfilled in order to 
     4. [ ]As a manager, you will check for how many stars your hotel is qualified to, and the hotel website should display this info.
 
 ## STARS:
-☆ [ ]The hotel website has a graphical presentation of the availibility of the three rooms. (There's some nice packages that can simplify that part. Try to google php package calendar
-☆ [ ]The hotel can give discounts, for example, how about 30% off for a visit longer than three days?
-☆ [ ]The hotel can offer at least three features that a visitor can pay for. You can create your own features, but checkout the different features that are listed at Awards - Points for the tourist, as they will be more valuable for the tourists. Note: A hotel cannot offer all the features that makes an accepted set. (For example, your hotel cannot offer bicycle, unicycle and rollerblades).
-☆ [ ]The hotel has the ability to use external data (images, videos, text etc) when producing succesful booking responses that the customers get.
-☆ [ ]The hotel manager has an admin.php page - accessible only by using your API_KEY - where different data can be altered, such as room prices, the star rating, discount levels and whatever you can think of.
+- ☆ [ ]The hotel website has a graphical presentation of the availibility of the three rooms. (There's some nice packages that can simplify that part. Try to google php package calendar
+- ☆ [ ]The hotel can give discounts, for example, how about 30% off for a visit longer than three days?
+- ☆ [ ]The hotel can offer at least three features that a visitor can pay for. You can create your own features, but checkout the different features that are listed at Awards - Points for the tourist, as they will be more valuable for the tourists. Note: A hotel cannot offer all the features that makes an accepted set. (For example, your hotel cannot offer bicycle, unicycle and rollerblades).
+- ☆ [ ]The hotel has the ability to use external data (images, videos, text etc) when producing succesful booking responses that the customers get.
+- ☆ [ ]The hotel manager has an admin.php page - accessible only by using your API_KEY - where different data can be altered, such as room prices, the star rating, discount levels and whatever you can think of.
 
 ## HOTEL BUILD INSTRUCTIONS
 - [ ] Our hotel MUST give a response to every succesful booking. The response should be in json and MUST have the following properties:
