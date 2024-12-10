@@ -103,7 +103,7 @@ $acceptedSets: [
 
 
 ### Database
-- [ ] Test database construction (test) **Week 1**
+- [x] Test database construction (test) **Week 1**
     - [ ] Evaluate and improve if necessary
     - [ ] [!TIP] Look into MySQL if there is time
 - [ ] Update database according to results from test-run
