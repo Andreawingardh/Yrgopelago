@@ -90,25 +90,59 @@ $acceptedSets: [
 ]);
 ```
 
-# Structure:
+# BUILD:
 
 ## Back-end:
+
+### Structure
+- [ ] Set up dev branch on GITHUB ** Week 1 **
+- [ ] Create structure (inspiration from lesson on project structure) ** Week 1 **
+    - [ ] Look into $config and autoload.php
+- [ ] Get API-key and put it in .env-file
+    - [ ] Add .env file to .gitignore
+
+
 ### Database
-- [ ] Test database construction (test.db)
+- [ ] Test database construction (test) ** Week 1 **
+    - [ ] Evaluate and improve if necessary
+    - [ ] [!TIP] Look into MySQL if there is time
+- [ ] Update database according to results from test-run
+- [ ] Create test connection with website ** Week 1 **
 
 ### Calendar
+- [ ] Find a calendar package and implement it (test)
+- [ ] Connect to database
+- [ ] Create a function to show availability in calendar
 
 ### Form
+- [ ] Present result in JSON format
+- [ ] Send result to database
+- [ ] Create if-clauses to check: ** Week 1 **
+    - [ ] Availability
+        - [ ] Connect with database
+    - [ ] Transfer code
+        - [ ] Fetch API from Yrgocentralbanken.
 
 ### Functions
-- [ ] Test functions page 
+- [ ] Test functions page (test) ** Week 1 **
 
-##Front-end:
+### ETC
+
+## Front-end:
 ### MARKUP
-
+- [ ] Build form in markup with relevant inputs (test) ** Week 1 **
+    - [ ] Arrival
+    - [ ] Departure
+    - [ ] Room
+    - [ ] Features
+    - [ ] Sum
+    - [ ] 
 ### CSS
+- [ ] 
 
 ### Javascript
+- [ ] 
 
-#To-dolist
-1.
+### ETC
+- [ ] Decide on name of island and hotel
+
