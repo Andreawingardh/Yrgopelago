@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+    margin: 10px;
+    border: 0
+}
+
+#hotel-booking-form {
+    /* display: flex;
+    flex-direction: column;
+    gap: 20px; */
+}
