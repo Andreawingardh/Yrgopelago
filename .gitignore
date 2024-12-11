@@ -1,3 +1,5 @@
 .env
 vendor
 database
+.DS_Store
+app/.DS_Store
