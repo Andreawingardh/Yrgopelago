@@ -108,6 +108,7 @@ $acceptedSets: [
     - [ ] [!TIP] Look into MySQL if there is time
 - [ ] Update database according to results from test-run
 - [ ] Create test connection with website **Week 1**
+- [ ] Think about how to create a junction table between features and booking
 
 ### Calendar
 - [ ] Find a calendar package and implement it (test)
@@ -117,11 +118,17 @@ $acceptedSets: [
 ### Form
 - [ ] Present result in JSON format
 - [ ] Send result to database
+    - [ ]  Room data
+    - [ ]  Feature data
+    - [ ]  Dates  
 - [ ] Create if-clauses to check: **Week 1**
     - [ ] Availability
         - [ ] Connect with database
     - [ ] Transfer code
         - [ ] Fetch API from Yrgocentralbanken.
+        - [ ] Check transfer code with transferCode database endpoint
+        - [ ] Deposit transfercode in deposit endpoint
+- [ ] Do a calculation of total_cost
 
 ### Functions
 - [ ] Test functions page (test) **Week 1**
