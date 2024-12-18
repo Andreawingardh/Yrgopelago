@@ -1,3 +1,4 @@
 .env
 vendor
 database
+app/bookings/receipt.json
