@@ -1,4 +1,11 @@
 .env
 vendor
 database
+.DS_Store
+app/.DS_Store
+users
+.DS_Store
+app/.DS_Store
+database/test.db
+
 app/bookings/receipt.json

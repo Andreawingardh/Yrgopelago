@@ -5,6 +5,10 @@ declare(strict_types=1);
 // Start the session engines.
 session_start();
 
+//Calls on the database
+// require __DIR__ . '/database/database.php';
+
+
 // Set the default timezone to Coordinated Universal Time.
 date_default_timezone_set('UTC');
 
@@ -14,8 +18,5 @@ mb_internal_encoding('UTF-8');
 // Include the helper functions.
 require __DIR__ . '/functions.php';
 
-// Fetch the global configuration array.
-$config = require __DIR__ . '/config.php';
-
-// Setup the database connection.
-$database = new PDO($config['database_path']);
+//Create message array
+$_SESSON['messages'] = [];
