@@ -8,3 +8,4 @@ users
 app/.DS_Store
 database/test.db
 
+app/bookings/receipt.json

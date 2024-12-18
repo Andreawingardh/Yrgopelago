@@ -31,7 +31,7 @@ Below you'll find a list of requirements which need to be fulfilled in order to 
 - [ ] As a manager, you will check for how many stars your hotel is qualified to, and the hotel website should display this info.
 
 ## STARS:
-- [ ] ☆ The hotel website has a graphical presentation of the availibility of the three rooms. (There's some nice packages that can simplify that part. Try to google php package calendar
+- [x] ☆ The hotel website has a graphical presentation of the availibility of the three rooms. (There's some nice packages that can simplify that part. Try to google php package calendar
 - [ ] ☆ The hotel can give discounts, for example, how about 30% off for a visit longer than three days?
 - [ ] ☆ The hotel can offer at least three features that a visitor can pay for. You can create your own features, but checkout the different features that are listed at Awards - Points for the tourist, as they will be more valuable for the tourists. Note: A hotel cannot offer all the features that makes an accepted set. (For example, your hotel cannot offer bicycle, unicycle and rollerblades).
 - [ ] ☆ The hotel has the ability to use external data (images, videos, text etc) when producing succesful booking responses that the customers get.
@@ -68,13 +68,13 @@ Below you'll find a list of requirements which need to be fulfilled in order to 
   }
 }
 ```
-- [ ] The booking calendar MUST be fixed to show only january 2025. Use attributes min and max in the input.
+- [x] The booking calendar MUST be fixed to show only january 2025. Use attributes min and max in the input.
 
-- [ ] For a bit of simplicity, all bookings is only stored as whole days, meaning that a tourist books a room the entire day.
+- [x] For a bit of simplicity, all bookings is only stored as whole days, meaning that a tourist books a room the entire day.
 
 - [ ] Your hotel MUST check availibilty of the requested room and dates before making the booking and sending the response package as json.
 
-- [ ] Your hotel MUST check if a transferCode submitted by a tourist is valid (otherwise you won't get any money)
+- [x] Your hotel MUST check if a transferCode submitted by a tourist is valid (otherwise you won't get any money)
 
 ## INFO:
 ```
@@ -95,47 +95,58 @@ $acceptedSets: [
 ## Back-end:
 
 ### Structure
-- [ ] Set up dev branch on GITHUB **Week 1**
-- [ ] Create structure (inspiration from lesson on project structure) **Week 1**
+- [x] Set up dev branch on GITHUB
+- [ x Create structure (inspiration from lesson on project structure)
     - [ ] Look into $config and autoload.php
-- [ ] Get API-key and put it in .env-file
-    - [ ] Add .env file to .gitignore
+    - [ ] Keep working on structure, it's currently not very good **Week 2**
+- [x] Get API-key and put it in .env-file
+    - [x] Add .env file to .gitignore
 
 
 ### Database
-- [x] Test database construction (test) **Week 1**
+- [x] Test database construction (test)
     - [ ] Evaluate and improve if necessary
-    - [ ] [!TIP] Look into MySQL if there is time
-- [ ] Update database according to results from test-run
-- [ ] Create test connection with website **Week 1**
+- [ ] Update database according to results from test-run **Week-2**
+- [x] Create test connection with website
+- [x] Think about how to create a junction table between features and booking
 
 ### Calendar
-- [ ] Find a calendar package and implement it (test)
-- [ ] Connect to database
-- [ ] Create a function to show availability in calendar
+- [x] Find a calendar package and implement it (test)
+- [x] Connect to database
+- [x] Create a function to show availability in calendar
 
 ### Form
 - [ ] Present result in JSON format
 - [ ] Send result to database
+    - [ ]  Room data
+    - [ ]  Feature data
+    - [ ]  Dates  
 - [ ] Create if-clauses to check: **Week 1**
-    - [ ] Availability
-        - [ ] Connect with database
-    - [ ] Transfer code
-        - [ ] Fetch API from Yrgocentralbanken.
+    - [x] Availability
+        - [x] Connect with database
+    - [x] Transfer code
+        - [x] Fetch API from Yrgocentralbanken.
+        - [x] Check transfer code with transferCode database endpoint
+        - [x] Deposit transfercode in deposit endpoint
+- [ ] Do a calculation of total_cost **Week 2**
+- [ ] Create a separate form for withdraw function?
 
 ### Functions
-- [ ] Test functions page (test) **Week 1**
+- [x] Test functions page (test)
+- [ ] Change code into functions and add to booking.php **Week 2**
 
 ### ETC
 
 ## Front-end:
 ### MARKUP
-- [ ] Build form in markup with relevant inputs (test) **Week 1**
-    - [ ] Arrival
-    - [ ] Departure
-    - [ ] Room
-    - [ ] Features
+- [ ] Build form in markup with relevant inputs (test)
+    - [x] Arrival
+    - [x] Departure
+    - [x] Room
+    - [x] Features
+        - [ ] Add real features into markup and database **Week 2**
     - [ ] Sum
+        - [ ] Figure out how to show total cost before form is submitted. Javascript?? **Week 2**
     - [ ] 
 ### CSS
 - [ ] 

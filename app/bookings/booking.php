@@ -8,9 +8,9 @@ require '../autoload.php';
 // session_start();
 
 if (isset($_SESSION['messages'])) {
-foreach($_SESSION['messages'] as $message) {
-    echo $message;
-}
+    foreach ($_SESSION['messages'] as $message) {
+        echo $message;
+    }
 }
 
 $bookingData = getBookingData($_POST);
@@ -30,10 +30,9 @@ echo 'Total cost: ' . $bookingData['total-cost'];
 if (isValidUuid($bookingData['transfer-code'])) {
     $transferCodeResult = checkTransferCode($bookingData);
     var_dump($transferCodeResult);
-}   else {
+} else {
     $_SESSION['messages'][] = 'Your transfer code is not valid';
     header('Location: /');
-
 }
 
 if (isset($transferCodeResult['status']) && $transferCodeResult['status'] === 'success') {
@@ -42,7 +41,4 @@ if (isset($transferCodeResult['status']) && $transferCodeResult['status'] === 's
 
     sendBookingData($bookingData);
     createJsonReceipt($bookingData);
-
 }
-
-
