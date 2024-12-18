@@ -11,6 +11,10 @@ if (isset($_POST['submit'])) {
     $features = $_POST['feature_id'] ?? [];
     $bookingID = $_POST['booking_id'];
 
+    echo "<pre>";
+    var_dump($features);
+    echo "</pre>";
+
     $insertFeatures = [];
     foreach ($features as $feature) {
         $insertFeatures[] = [
@@ -19,14 +23,22 @@ if (isset($_POST['submit'])) {
         ];
     }
 
+
+
+    
+    
+    echo "<pre>";
+    var_dump($featuresInformation);
+    echo "</pre>";
+
     $statement = $database->prepare("INSERT INTO booking_feature (booking_id, feature_id) VALUES (:booking_id, :feature_id);");
 
-    foreach($insertFeatures as $feature) {
-    $statement->bindParam(':booking_id', $feature['booking_id']);
-    $statement->bindParam(':feature_id', $feature['feature_id']);
-    $statement->execute();
+    foreach ($insertFeatures as $feature) {
+        $statement->bindParam(':booking_id', $feature['booking_id']);
+        $statement->bindParam(':feature_id', $feature['feature_id']);
+        $statement->execute();
     }
-
+    var_dump($insertFeatures);
 }
 
 ?>
