@@ -6,7 +6,7 @@ declare(strict_types=1);
 session_start();
 
 //Calls on the database
-require __DIR__ . '/database/database.php';
+// require __DIR__ . '/database/database.php';
 
 
 // Set the default timezone to Coordinated Universal Time.
