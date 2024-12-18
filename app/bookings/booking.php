@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 require '../autoload.php';
 
+// session_unset();
+// session_start();
+
 if (isset($_SESSION['messages'])) {
 foreach($_SESSION['messages'] as $message) {
     echo $message;
@@ -39,6 +42,7 @@ if (isset($transferCodeResult['status']) && $transferCodeResult['status'] === 's
 
     sendBookingData($bookingData);
     createJsonReceipt($bookingData);
+
 }
 
 
