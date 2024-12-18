@@ -4,16 +4,52 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-
+use benhall14\phpCalendar\Calendar as Calendar;
 use GuzzleHttp\Exception\ClientException;
 
+
+/* This function allows the user to create a transfer code */
+
+function withdrawTransferCode ($formData) {
+
+$user = trim(htmlspecialchars($formData['user']));
+$apiKey = trim(htmlspecialchars($formData['api-key']));
+$amount = trim(htmlspecialchars($formData['amount']));
+
+try {
+    $client = new GuzzleHttp\Client();
+    /* This send the data from the form to the api-endpoint */
+    $res = $client->request('POST', 'https://yrgopelago.se/centralbank/withdraw', [
+        'form_params' => [
+            'user' => $user,
+            'api_key' => $apiKey,
+            'amount' => $amount
+        ]
+    ]);
+
+    $body = $res->getBody();
+    $stringBody = (string) $body;
+    $withdrawResult = json_decode($stringBody, true);
+    var_dump($withdrawResult);
+    return $withdrawResult;
+
+} catch (ClientException $e) {
+    /* If the fetch returns an error response, this code gets the contents of the response and adds it to $_SESSION['messages'] */
+    $response = $e->getResponse();
+    $errorContent = $response->getBody()->getContents();
+
+    $errorMessage = json_decode($errorContent, true);
+    return $_SESSION['messages'][] = $errorMessage['error'];
+}
+
+}
 
 /* This function creates an array of the booking data */
 
 function getBookingData($formData)
 {
 
-    $database = new PDO('sqlite:' . __DIR__ . '/database/test.db');
+    $database = new PDO('sqlite:' . __DIR__ . '/database/database.db');
     $tourist = trim(htmlspecialchars($formData['tourist']));
     $checkInDate = trim(htmlspecialchars($formData['check-in-date']));
     $checkOutDate = trim(htmlspecialchars($formData['check-out-date']));
@@ -57,72 +93,35 @@ function isValidUuid(string $uuid): bool
     return true;
 }
 
-/* This function is a draft and should not be used */
-// function checkTransferCode2($formData)
-// {
-
-//     /* Fetching transfercode from centralbanken-API */
-//     $transferCode = trim(htmlspecialchars($formData['transfer-code']));
-//     $totalCost = $formData['total-cost'];
-
-//     /*Checking if the transfercode is set */
-//     if (isset($transferCode) && !empty($transferCode)) {
-
-//         /* Fetching the transfercode endpoint from the centralbanken API and turning it into an array*/
-
-//         $centralBanken = json_decode(file_get_contents('https://www.yrgopelago.se/centralbank/transferCode'), true);
-
-//         /* Giving the centralbanken transfer code a variable name */
-//         $centralBankenTransferCode = $centralBanken['response (success 200 OK)']['transferCode'];
-
-//         /* Giving the centralbanken transfer code amount a variable name */
-//         $centralBankenTransferCodeAmount = $centralBanken['response (success 200 OK)']['amount'];
-
-//         /* Checking if the transfer code exists in API and checking the amount */
-//         if ($transferCode === $centralBankenTransferCode && $centralBankenTransferCodeAmount >= $totalCost) {
-
-//             /* Adding the transfercode and username to deposit endpoint in Centralbanken */
-//             $deposit = json_decode(file_get_contents('https://www.yrgopelago.se/centralbank/deposit'), true);
-
-//             /* Add the transfer Code and Username to deposit array */
-//             $depost['form_params'] = ['user' => 'Andy', 'transferCode' => $transferCode];
-//             file_put_contents('https://www.yrgopelago.se/centralbank/deposit', (json_encode($deposit)));
-//         } else {
-//             redirect('/');
-//             $_SESSION['message'] = ['Transfercode is not set'];
-//         }
-//     } else {
-//         redirect('/');
-//         $_SESSION['message'] = ['Transfercode is not valid'];
-//     }
-// }
-
-
 
 /*This function checks availability of hotel rooms */
 
 function checkAvailability($bookingData)
 {
-    $database = new PDO('sqlite:' . __DIR__ . '/database/test.db');
-
+    $database = $bookingData['database'];
     $checkInDate = $bookingData['check-in-date'];
     $checkOutDate = $bookingData['check-out-date'];
     $roomID = $bookingData['room-id'];
 
-    /* This checks if there is availability in the room at the given dates */
-    $statement = $database->prepare("SELECT COUNT(*) as availability FROM bookings
+
+    if ($checkOutDate > $checkInDate) {
+        /* This checks if there is availability in the room at the given dates */
+        $statement = $database->prepare("SELECT COUNT(*) as availability FROM bookings
         WHERE room_id = :room_id
         AND (check_in_date < :check_out_date AND check_out_date > :check_in_date);");
 
-    /* Binds the relevant variables to the parameters */
-    $statement->bindParam(':room_id', $roomID, PDO::PARAM_INT);
-    $statement->bindParam(':check_in_date', $checkInDate, PDO::PARAM_STR);
-    $statement->bindParam(':check_out_date', $checkOutDate, PDO::PARAM_STR);
-    $statement->execute();
+        /* Binds the relevant variables to the parameters */
+        $statement->bindParam(':room_id', $roomID, PDO::PARAM_INT);
+        $statement->bindParam(':check_in_date', $checkInDate, PDO::PARAM_STR);
+        $statement->bindParam(':check_out_date', $checkOutDate, PDO::PARAM_STR);
+        $statement->execute();
 
-    /* $availability returns 0 if there is an availability, a higher number if the room is booked */
-    $availability = $statement->fetchColumn();
-    return $availability;
+        /* $availability returns 0 if there is an availability, a higher number if the room is booked */
+        $availability = $statement->fetchColumn();
+        return $availability;
+    }
+    $_SESSION['messages'][] = "Your dates are reversed";
+    return 1;
 }
 
 /* This function gets total cost of booking */
@@ -232,31 +231,44 @@ function sendBookingData($bookingData)
 {
 
     $database = $bookingData['database'];
+    $tourist = $bookingData['tourist'];
     $roomID = $bookingData['room-id'];
     $checkInDate = $bookingData['check-in-date'];
     $checkOutDate = $bookingData['check-out-date'];
-    $features = $bookingData['feature_id'] ?? [];
+    $features = $bookingData['features'] ?? [];
+    $transferCode = $bookingData['transfer-code'];
+    $totalCost = $bookingData['total-cost'];
 
     /* This checks if the dates and room have been set and then inserts the data into the table */
-    $statement = $database->prepare("INSERT INTO bookings (room_id, check_in_date, check_out_date) VALUES (:room_id, :check_in_date, :check_out_date);");
+    $statement = $database->prepare("INSERT INTO bookings (tourist, room_id, check_in_date, check_out_date, transfer_code, total_cost) VALUES (:tourist, :room_id, :check_in_date, :check_out_date, :transfer_code, :total_cost);");
 
     /* This binds the parameters to the query */
+    $statement->bindParam(':tourist', $tourist, PDO::PARAM_STR);
     $statement->bindParam(':room_id', $roomID, PDO::PARAM_INT);
     $statement->bindParam(':check_in_date', $checkInDate, PDO::PARAM_STR);
     $statement->bindParam(':check_out_date', $checkOutDate, PDO::PARAM_STR);
+    $statement->bindParam(':transfer_code', $transferCode, PDO::PARAM_STR);
+    $statement->bindParam(':total_cost', $totalCost, PDO::PARAM_INT);
 
     /* This send the data to the table */
     $statement->execute();
 
-    /* This gets the last inserted ID for putting features into booking_feature table */
-    $bookingID = $database->lastInsertId();
+
+    /* This selects the latest ID entered */
+    $statement = $database->prepare("SELECT id
+    FROM bookings
+    where transfer_code = :transfer_code;");
+    $statement->bindParam(':transfer_code', $transferCode);
+    $statement->execute();
+    $bookingId = $statement->fetchColumn();
+    echo "Booking Id: " . $bookingId;
 
     /* This inserts features into an array with the corresponding booking_id */
     // if (!empty($features)) {
     //     $insertFeatures = [];
     //     foreach ($features as $feature) {
     //         $insertFeatures[] = [
-    //             'booking_id' => $bookingID,
+    //             'booking_id' => $bookingId,
     //             'feature_id' => $feature
     //         ];
     //     }
@@ -266,13 +278,13 @@ function sendBookingData($bookingData)
     $statement = $database->prepare("INSERT INTO booking_feature (booking_id, feature_id) VALUES (:booking_id, :feature_id);");
 
     /* This loops through the chosen features and adds them to booking_feature table */
-    foreach ($features as $feature) {
-        $statement->bindParam(':booking_id', $bookingID);
-        $statement->bindParam(':feature_id', $feature);
-        $statement->execute();
+    if (!empty($features)) {
+        foreach ($features as $feature) {
+            $statement->bindParam(':booking_id', $bookingId, PDO::PARAM_INT);
+            $statement->bindParam(':feature_id', $feature, PDO::PARAM_INT);
+            $statement->execute();
+        }
     }
-
-
 
     /* This adds a successful messages to the $_SESSION['messages'] array */
     $_SESSION['messages'][] = "Successfully added dates to table";
@@ -280,7 +292,6 @@ function sendBookingData($bookingData)
 }
 
 /* This function writes the data to a json-file and sends the user a link */
-/*@TODO: Why does the file_put_contents part of this function not work */
 function createJsonReceipt($bookingData)
 {
 
@@ -324,25 +335,35 @@ function createJsonReceipt($bookingData)
     file_put_contents('receipt.json', json_encode($receipt));
 
     $_SESSION['messages'][] = '
-    <a href="/receipt.json" target="_blank">Your receipt</a>
+    <a href="/app/bookings/receipt.json" target="_blank">Your receipt</a>
     <?php ';
     return header('Location: /');
+}
 
-    // $jsonResult = json_encode($receipt, JSON_PRETTY_PRINT);
+/* Function to show calendar */
+function getCalendar($roomID)
+{
+    $database = new PDO('sqlite:' . __DIR__ . '/database/database.db');
+    $calendar = new Calendar;
+    $events = [];
+    $statement = $database->prepare("SELECT check_in_date, check_out_date
+FROM bookings
+where room_id = :room_id;");
+    $statement->bindParam(':room_id', $roomID);
+    $statement->execute();
+    $bookedDates = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    // if ($jsonResult === false) {
-    //     // Log JSON encoding error
-    //     $_SESSION['messages'][] = 'Error encoding JSON: ' . json_last_error_msg();
-    //     return false;
-    // }
+    foreach ($bookedDates as $date) {
+        $events[] = [
+            'start' => $date['check_in_date'],
+            'end' => $date['check_out_date'],
+            'mask' => true,
+            'classes' => ['myclass', 'abc']
+        ];
+    }
 
-    // $writeResult = file_put_contents('receipt.json', $jsonResult);
+    $calendar->addEvents($events);
+    $calendar->useMondayStartingDate();
 
-    // if ($writeResult === false) {
-    //     $_SESSION['messages'][] = 'Error writing JSON file';
-    //     return false;
-    // }
-
-    // $_SESSION['messages'][] = '<a href="/receipt.json" target="_blank">Your receipt</a>';
-    // return header('Location: /');
+    echo $calendar->draw(date('2025-01-01'));
 }
