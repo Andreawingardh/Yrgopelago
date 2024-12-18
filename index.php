@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 require __DIR__ . '/app/autoload.php';
 
+if (isset($_SESSION['messages'])) {
+foreach($_SESSION['messages'] as $message) {
+    echo $message;
+}
+}
+
+
 ?>
 
 
@@ -20,21 +27,25 @@ require __DIR__ . '/app/autoload.php';
 </head>
 
 <body>
-<?php
-        if(!empty($_SESSION['message'])) {
-        foreach($_SESSION['message'] as $message):
-        ?>
-        <p class="alert"><?=$message?></p>
-        <?php endforeach; 
-        }?>
+    <?php
+    if (!empty($_SESSION['messages'])) {
+        foreach ($_SESSION['messages'] as $message):
+    ?>
+            <p class="alert"><?= $message ?></p>
+    <?php endforeach;
+    } ?>
     <form id="hotel-booking-form" action="app/bookings/booking.php" method="post">
         <fieldset>
+            <legend>What's your name?</legend>
+            <textarea name="tourist" label="name"></textarea>
+        </fieldset>
+        <fieldset>
             <legend>Choose your room</legend>
-            <select name="rooms" id="hotel-rooms" required>
+            <select name="room_id" id="hotel-rooms" required>
                 <option value="">Please choose room</option>
-                <option value="budget">Budget</option>
-                <option value="standard">Standard</option>
-                <option value="luxury">Luxury</option>
+                <option value="1">Budget</option>
+                <option value="2">Standard</option>
+                <option value="3">Luxury</option>
             </select>
         </fieldset>
         <fieldset>
@@ -44,18 +55,18 @@ require __DIR__ . '/app/autoload.php';
         </fieldset>
         <fieldset>
             <legend>Choose your features</legend>
-            <input type="checkbox" id="feature1" name="feature1" value="feature1" />
-            <label for="feature1">Feature1</label><br />
-            <input type="checkbox" id="feature1" name="feature1" value="feature1" />
-            <label for="feature1">Feature1</label><br />
-            <input type="checkbox" id="feature1" name="feature1" value="feature1" />
-            <label for="feature1">Feature1</label><br />
+            <input type="checkbox" id="feature1" name="feature_id[]" value="1" />
+            <label for="feature1">Feature1 ($2)</label><br />
+            <input type="checkbox" id="feature1" name="feature_id[]" value="2" />
+            <label for="feature1">Feature2 ($1)</label><br />
+            <input type="checkbox" id="feature1" name="feature_id[]" value="3" />
+            <label for="feature1">Feature3 ($2)</label><br />
         </fieldset>
         <fieldset>
             <legend>Enter your transfer-code:</legend>
-            <input type="text" id="transfer-code" name="transfer-code" required></input>
+            <input type="text" id="transfer-code" name="transferCode" required></input>
         </fieldset>
-        <fieldset id="total-cost" name="total-cost">Total cost: 
+        <fieldset id="total-cost" name="total-cost">Total cost:
 
         </fieldset>
         <!-- Arrival
