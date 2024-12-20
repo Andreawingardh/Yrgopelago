@@ -1,8 +1,3 @@
-<?php
-
-declare(strict_types=1);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +21,7 @@ declare(strict_types=1);
     <title>Hotel de Pierrot</title>
 </head>
 <header>
-<nav><a href="#hotel-rooms-description">Our rooms</a><a href="#calendar">Calendar</a><a href="#atm">Withdrawal</a><a href="#hotel-booking">Book</a></nav>
+<!-- <nav><a href="#hotel-rooms-description">Our rooms</a><a href="#calendar">Calendar</a><a href="#atm">Withdrawal</a><a href="#hotel-booking">Book</a></nav> -->
 </header>
 <svg id="header-logo" width="180" height="131" viewBox="0 0 180 131" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="Logo">
