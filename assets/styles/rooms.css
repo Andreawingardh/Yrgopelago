@@ -1,0 +1,26 @@
+section#hotel-rooms-description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.3125rem;
+}
+
+#hotel-rooms-description article {
+    display: flex;
+    width: 80%;
+    height: 32.1875rem;
+    padding: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    background: #EABCBC;
+    margin: auto;
+}
+
+#hotel-rooms-description img {
+    width: 40%;
+    height: 26.8125rem;
+    flex-shrink: 0;
+    background-color: aquamarine;
+    object-fit: cover;
+}

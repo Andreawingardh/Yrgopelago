@@ -1,0 +1,31 @@
+h1 {
+    font-family: var(--text-font);
+}
+
+h1 {
+    font-family: var(--header-font);
+    font-size: 4rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+button {
+    font-family: var(--header-font);
+    font-size: 1rem;
+}
+
+h2 {
+    font-family: var(--header-font);
+    font-size: 2rem;
+}
+
+#header-h3 {
+    font-family: 'Long Cang';
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 200;
+}
+
+#intro p {
+    text-align: center;
+}
