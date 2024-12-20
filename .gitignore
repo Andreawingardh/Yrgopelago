@@ -10,3 +10,4 @@ database/test.db
 
 app/bookings/receipt.json
 app/bookings/receipt.json
+*.json
