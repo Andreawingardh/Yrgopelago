@@ -10,38 +10,38 @@ use GuzzleHttp\Exception\ClientException;
 
 /* This function allows the user to create a transfer code */
 
-function withdrawTransferCode ($formData) {
+function withdrawTransferCode(array $formData): array
+{
 
-$user = trim(htmlspecialchars($formData['user']));
-$apiKey = trim(htmlspecialchars($formData['api-key']));
-$amount = trim(htmlspecialchars($formData['amount']));
+    $user = trim(htmlspecialchars($formData['user']));
+    $apiKey = trim(htmlspecialchars($formData['api-key']));
+    $amount = trim(htmlspecialchars($formData['amount']));
 
-try {
-    $client = new GuzzleHttp\Client();
-    /* This send the data from the form to the api-endpoint */
-    $res = $client->request('POST', 'https://yrgopelago.se/centralbank/withdraw', [
-        'form_params' => [
-            'user' => $user,
-            'api_key' => $apiKey,
-            'amount' => $amount
-        ]
-    ]);
+    try {
+        $client = new GuzzleHttp\Client();
+        /* This send the data from the form to the api-endpoint */
+        $res = $client->request('POST', 'https://yrgopelago.se/centralbank/withdraw', [
+            'form_params' => [
+                'user' => $user,
+                'api_key' => $apiKey,
+                'amount' => $amount
+            ]
+        ]);
 
-    $body = $res->getBody();
-    $stringBody = (string) $body;
-    $withdrawResult = json_decode($stringBody, true);
-    var_dump($withdrawResult);
-    return $withdrawResult;
+        $body = $res->getBody();
+        $stringBody = (string) $body;
+        $withdrawResult = json_decode($stringBody, true);
+        // var_dump($withdrawResult);
+        return $withdrawResult;
+    } catch (ClientException $e) {
+        /* If the fetch returns an error response, this code gets the contents of the response and adds it to $_SESSION['messages'] */
+        $response = $e->getResponse();
+        $errorContent = $response->getBody()->getContents();
 
-} catch (ClientException $e) {
-    /* If the fetch returns an error response, this code gets the contents of the response and adds it to $_SESSION['messages'] */
-    $response = $e->getResponse();
-    $errorContent = $response->getBody()->getContents();
-
-    $errorMessage = json_decode($errorContent, true);
-    return $_SESSION['messages'][] = $errorMessage['error'];
-}
-
+        $errorMessage = json_decode($errorContent, true);
+        $_SESSION['messages']['error'] = $errorMessage['error'];
+        return $_SESSION['messages'];
+    }
 }
 
 /* This function creates an array of the booking data */
@@ -119,9 +119,10 @@ function checkAvailability($bookingData)
         /* $availability returns 0 if there is an availability, a higher number if the room is booked */
         $availability = $statement->fetchColumn();
         return $availability;
+    } else{
+    return $_SESSION['errors'][] = "Your dates are reversed";
+    redirect('/#hotel-booking');
     }
-    $_SESSION['messages'][] = "Your dates are reversed";
-    return 1;
 }
 
 /* This function gets total cost of booking */
@@ -150,17 +151,13 @@ function getTotalCost($bookingData)
         $singleFeatureCost = $statement->fetchColumn();
         $totalFeatureCost += $singleFeatureCost;
     }
-    echo 'Feature cost: ' . $totalFeatureCost;
 
     /* This converts the dates to UNIX time */
     $totalDays = (strtotime($checkOutDate) - strtotime($checkInDate)) / (60 * 60 * 24);
 
     /* This calculates the room stay + the cost of feature*/
     $totalCost = ($roomCost * $totalDays) + $totalFeatureCost;
-    $bookingData['total-cost'] = $totalCost;
-
-    /* This adds the total cost to $_SESSION['messages] */
-    $_SESSION['messages'][] = 'Your total cost is $' . $totalCost . '.';
+    $bookingData['total-cost'] = $totalCost; '.';
 
     return $bookingData['total-cost'];
 }
@@ -185,7 +182,6 @@ function checkTransferCode($bookingData)
         $body = $res->getBody();
         $stringBody = (string) $body;
         $transferCodeResult = json_decode($stringBody, true);
-        var_dump($transferCodeResult);
         return $transferCodeResult;
     } catch (ClientException $e) {
         /* If the fetch returns an error response, this code gets the contents of the response and adds it to $_SESSION['messages'] */
@@ -193,7 +189,8 @@ function checkTransferCode($bookingData)
         $errorContent = $response->getBody()->getContents();
 
         $errorMessage = json_decode($errorContent, true);
-        return $_SESSION['messages'][] = $errorMessage['error'];
+        return $_SESSION['errors'][] = $errorMessage['error'];
+        redirect('/#hotel-booking');
     }
 }
 
@@ -218,15 +215,14 @@ function depositTransferCode($transferCode)
         $errorContent = $response->getBody()->getContents();
 
         $errorMessage = json_decode($errorContent, true);
-        return $_SESSION['messages'][] = $errorMessage['error'];
+        return $_SESSION['errors'][] = $errorMessage['error'];
+        redirect('/#hotel-booking');
     }
 }
 
 
 
 /* This function sends the booking data to the database */
-/*@TODO: Add the value for tourist or name to the insert query. */
-/*@TODO: Figure out why the insert into booking_feature table is inserting the wrong data */
 function sendBookingData($bookingData)
 {
 
@@ -261,18 +257,6 @@ function sendBookingData($bookingData)
     $statement->bindParam(':transfer_code', $transferCode);
     $statement->execute();
     $bookingId = $statement->fetchColumn();
-    echo "Booking Id: " . $bookingId;
-
-    /* This inserts features into an array with the corresponding booking_id */
-    // if (!empty($features)) {
-    //     $insertFeatures = [];
-    //     foreach ($features as $feature) {
-    //         $insertFeatures[] = [
-    //             'booking_id' => $bookingId,
-    //             'feature_id' => $feature
-    //         ];
-    //     }
-    // }
 
     /* This prepares a statement to insert the chosen features into booking_feature table */
     $statement = $database->prepare("INSERT INTO booking_feature (booking_id, feature_id) VALUES (:booking_id, :feature_id);");
@@ -285,10 +269,6 @@ function sendBookingData($bookingData)
             $statement->execute();
         }
     }
-
-    /* This adds a successful messages to the $_SESSION['messages'] array */
-    $_SESSION['messages'][] = "Successfully added dates to table";
-    $_SESSION['messages'][] = 'You will check in on ' . $checkInDate . ' and out on ' . $checkOutDate;
 }
 
 /* This function writes the data to a json-file and sends the user a link */
@@ -315,11 +295,10 @@ function createJsonReceipt($bookingData)
         }
     }
 
-
     $receipt = [
         [
-            'island' => "DEFAULT ISLAND",
-            'hotel' => "DEFAULT HOTEL",
+            'island' => "Clown Island",
+            'hotel' => "Hotel de Pierrot",
             "arrival_date" => $bookingData['check-in-date'],
             "departure_date" => $bookingData['check-out-date'],
             "total_cost" => $bookingData['total-cost'],
@@ -327,17 +306,16 @@ function createJsonReceipt($bookingData)
             "features" => $featuresInformation
         ],
         "additional_info" => [
-            "greeting" => "Thank you for choosing DEFAULT HOTEL",
-            "imageUrl" => "https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg"
+            "greeting" => "Thank you for choosing Hotel de Pierrot",
+            "imageUrl" => "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTV2cW8xOHJyZTgzdXVocTZmbXdsM3NyNXplNDVxcWd5azhvNWNzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LD7LJhWI2u1lqf5oUD/giphy.gif"
         ]
     ];
 
     file_put_contents('receipt.json', json_encode($receipt));
 
-    $_SESSION['messages'][] = '
-    <a href="/app/bookings/receipt.json" target="_blank">Your receipt</a>
-    <?php ';
-    return header('Location: /');
+    $_SESSION['messages']['receipt'] = '/app/bookings/receipt.json';
+    $_SESSION['messages']['image'] = 'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTV2cW8xOHJyZTgzdXVocTZmbXdsM3NyNXplNDVxcWd5azhvNWNzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LD7LJhWI2u1lqf5oUD/giphy.gif';
+    return redirect('/');
 }
 
 /* Function to show calendar */

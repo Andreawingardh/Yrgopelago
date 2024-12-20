@@ -1,13 +1,27 @@
+section#calendar {
+    width: 40%;
+    display: flex;
+    height: fit-content;
+    padding: 3.125rem 0rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+}
+
+/* Code from package */
 .weekly-calendar {
     min-width: 850px;
 }
 
 .calendar {
-    background: #2CA8C2;
+    background: #993434;
     color: #FFF;
-    width: 60%;
-    font-family: 'Oxygen';
+    width: 100%;
+    font-family: 'Inter';
     table-layout: fixed;
+    border-radius: 10px;
 }
 
 .calendar.purple {
@@ -35,7 +49,7 @@
 }
 
 .calendar.blue {
-    background: #5481E6;
+    background: #993434;
 }
 
 .calendar-title th {
@@ -45,6 +59,7 @@
     text-align: center;
     text-transform: uppercase;
     background: rgba(0, 0, 0, 0.05);
+    font-family: var(--header-font);
 }
 
 .calendar-header th {

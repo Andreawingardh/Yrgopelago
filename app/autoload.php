@@ -3,11 +3,7 @@
 declare(strict_types=1);
 
 // Start the session engines.
-session_start();
-
-//Calls on the database
-// require __DIR__ . '/database/database.php';
-
+// session_start();
 
 // Set the default timezone to Coordinated Universal Time.
 date_default_timezone_set('UTC');
@@ -20,3 +16,6 @@ require __DIR__ . '/functions.php';
 
 //Create message array
 $_SESSON['messages'] = [];
+
+//Create error array 
+$_SESSION['errors'] = [];
