@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Calculate total cost (room price * number of days + feature costs)
-        const totalCost = (selectedRoomPrice * numberOfDays) + (featureCost * numberOfDays);
+        const totalCost = (selectedRoomPrice * numberOfDays) + (featureCost);
 
         // Update total cost display
         totalCostDisplay.textContent = `Total cost: $${totalCost} (${numberOfDays} nights)`;
