@@ -2,17 +2,30 @@
 
 declare(strict_types=1);
 
-
-
-
-
 ?>
+<section id=hotel-booking>
+    <h2>Book a room!</h2>
+    <p>Ready to get clowning? Book a room with us today!</p>
 
+    <?php
+    if (!empty($_SESSION['errors'])) {
+    ?><div class="error">
+            <?php
+            foreach ($_SESSION['errors'] as $error) {
+                echo $error;
+            }
+            unset($_SESSION['errors']);
+            ?>
+        </div>
+    <?php
+    }
+
+    ?>
 
     <form id="hotel-booking-form" action="app/bookings/booking.php" method="post">
         <fieldset>
             <legend>What's your name?</legend>
-            <textarea name="tourist" label="name"></textarea>
+            <input type="text" name="tourist" label="name"></input>
         </fieldset>
         <fieldset>
             <legend>Choose your room</legend>
@@ -30,12 +43,15 @@ declare(strict_types=1);
         </fieldset>
         <fieldset>
             <legend>Choose your features</legend>
-            <input type="checkbox" id="feature1" name="feature_id[]" value="1" />
-            <label for="feature1">Feature1 ($2)</label><br />
-            <input type="checkbox" id="feature1" name="feature_id[]" value="2" />
-            <label for="feature2">Feature2 ($1)</label><br />
-            <input type="checkbox" id="feature1" name="feature_id[]" value="3" />
-            <label for="feature3">Feature3 ($2)</label><br />
+            <div class="checkbox"><input type="checkbox" class="feature" name="feature_id[]" value="1" />
+                <label for="feature1">Ping pong table ($2)</label>
+            </div>
+            <div class="checkbox"><input type="checkbox" class="feature" name="feature_id[]" value="2" />
+                <label for="feature2">Yatzy ($1)</label>
+            </div>
+            <div class="checkbox"><input type="checkbox" class="feature" name="feature_id[]" value="3" />
+                <label for="feature3">Unicycle ($2)</label>
+            </div>
         </fieldset>
         <fieldset>
             <legend>Enter your transfer-code:</legend>
@@ -44,18 +60,21 @@ declare(strict_types=1);
         <fieldset id="total-cost" name="total-cost">Total cost:
 
         </fieldset>
-        <button type="submit">Book your room!</button>
+        <button type="submit" name="hotel-booking-submit">Book your room!</button>
     </form>
     <?php
-if (isset($_SESSION['messages'])) {
-    foreach($_SESSION['messages'] as $message) {
-        echo $message;
-        echo "<br>";
-    }
-    }
-    
-     ?>
-    <script src="/assets/scripts/script.js"></script>
-</body>
 
-</html>
+
+    if (isset($_SESSION['messages']['receipt'])) {
+    ?>
+        <h2>Your booking is successful! Welcome to Hotel de Pierrot. We hope you enjoy your stay!</h2>
+        <a href="<?= $_SESSION['messages']['receipt'] ?>" target="_blank">Your receipt</a>
+        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTV2cW8xOHJyZTgzdXVocTZmbXdsM3NyNXplNDVxcWd5azhvNWNzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LD7LJhWI2u1lqf5oUD/giphy.gif" />
+    <?php
+        unset($_SESSION['messages']);
+    }
+
+
+
+    ?>
+</section>

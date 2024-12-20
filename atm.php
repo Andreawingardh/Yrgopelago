@@ -3,19 +3,17 @@
 declare(strict_types=1);
 
 
-if (isset($_POST['submit'])) {
-    $withdrawResult = withdrawTransferCode($_POST);
-    echo "Your transfercode: " . $withdrawResult['transferCode'];
-    echo "Your amount: " . $withdrawResult['amount'];
-}
+
 
 
 ?>
-<h1>Want to make a withdrawal?</h1>
-<form id="withdraw-form" action="atm.php" method="post">
+<section id="atm">
+    <h2>Want to make a withdrawal?</h2>
+    <p>Here at Hotel de Pierrot we make it easy for you to get the money you need to book a room. The money is only a click away!</p>
+    <form id="withdraw-form" action="/#atm" method="post">
         <fieldset>
             <legend>Name:</legend>
-            <textarea name="user" label="user"></textarea>
+            <input type="text" name="user" label="user"></input>
         </fieldset>
         <fieldset>
             <legend>Enter your API-code:</legend>
@@ -25,9 +23,21 @@ if (isset($_POST['submit'])) {
             <legend>Amount:</legend>
             <input type="text" id="amount" name="amount" required></input>
         </fieldset>
-        <button type="submit" name="submit">Get transfercode!</button>
+        <button type="submit" name="atm-submit">Get transfercode!</button>
     </form>
-
-
-</body>
-</html>
+    <?php
+    if (isset($_POST['atm-submit'])) {
+        $withdrawResult = withdrawTransferCode($_POST);
+        if (isset($withdrawResult['transferCode'])) {
+    ?>
+            <p class="withdrawal">Your transfercode: <?= $withdrawResult['transferCode']; ?></p>
+            <p class="withdrawal">Your amount: <?= $withdrawResult['amount']; ?></p>
+    <?php } else if (!isset($withdrawResult['transferCode'])) {
+            foreach ($_SESSION['messages'] as $error) {
+                echo 'Error: ' . $error . ' Please try again.';
+            }
+            unset($_SESSION['messages']);
+        }
+    }
+    ?>
+</section>
