@@ -5,7 +5,14 @@ section#hotel-booking {
     flex-direction: column;
     align-items: center;
     gap: 2.3125rem;
-    width: 60%;
+    width: fit-content;
+    height: fit-content;
+}
+
+#hotel-booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 input {
@@ -75,4 +82,16 @@ section#atm p, section#atm h2 {
 
 p.withdrawal {
     border: 2px solid var(--primary-color);
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:200px;
+    height: fit-content;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: center;
 }
