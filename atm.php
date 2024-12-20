@@ -23,14 +23,21 @@ declare(strict_types=1);
             <legend>Amount:</legend>
             <input type="text" id="amount" name="amount" required></input>
         </fieldset>
-        <button type="submit" name="submit">Get transfercode!</button>
+        <button type="submit" name="atm-submit">Get transfercode!</button>
     </form>
     <?php
-    if (isset($_POST['api-key'])) {
+    if (isset($_POST['atm-submit'])) {
         $withdrawResult = withdrawTransferCode($_POST);
+        if (isset($withdrawResult['transferCode'])) {
     ?>
-        <p class="withdrawal">Your transfercode: <?= $withdrawResult['transferCode']; ?></p>
-        <p class="withdrawal">Your amount: <?= $withdrawResult['amount']; ?></p>
-    <?php }
+            <p class="withdrawal">Your transfercode: <?= $withdrawResult['transferCode']; ?></p>
+            <p class="withdrawal">Your amount: <?= $withdrawResult['amount']; ?></p>
+    <?php } else if (!isset($withdrawResult['transferCode'])) {
+            foreach ($_SESSION['messages'] as $error) {
+                echo 'Error: ' . $error . ' Please try again.';
+            }
+            unset($_SESSION['messages']);
+        }
+    }
     ?>
 </section>
