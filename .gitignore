@@ -9,3 +9,5 @@ app/.DS_Store
 database/test.db
 
 app/bookings/receipt.json
+app/bookings/receipt.json
+app/.DS_Store
