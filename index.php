@@ -5,23 +5,16 @@ require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/vendor/autoload.php'
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/styles/global.css">
-    <link rel="stylesheet" href="/assets/styles/calendar.css">
-    <title>Hotel</title>
-</head>
-<body>
-<?php    
-require __DIR__ . '/calendar.php';
-require __DIR__ . '/atm.php';
-require __DIR__ . '/form.php';
+<?php
+require __DIR__ .'/header.php';?>
+<?php require __DIR__ .'/rooms.php'; ?>
+<hr>
+<?php require __DIR__ . '/calendar.php'; ?>
+<hr>
+<?php require __DIR__ . '/atm.php'; ?>
+<hr>
+<?php require __DIR__ . '/form.php';?>
+<hr>
+<?php require __DIR__ . '/footer.php';
 ?>
-
-<script src="/assets/scripts/script.js"></script>
-</body>
-</html>
