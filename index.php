@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 require __DIR__ . '/app/autoload.php';
-require __DIR__ . '/vendor/autoload.php'
+require __DIR__ . '/vendor/autoload.php';
+session_start();
 ?>
 
 
@@ -12,8 +13,8 @@ require __DIR__ .'/header.php';?>
 <hr>
 <?php require __DIR__ . '/calendar.php'; ?>
 <hr>
-<?php require __DIR__ . '/atm.php'; ?>
-<hr>
+<!-- require __DIR__ . '/atm.php'; ?> -->
+<!-- <hr> -->
 <?php require __DIR__ . '/form.php';?>
 <hr>
 <?php require __DIR__ . '/footer.php';
