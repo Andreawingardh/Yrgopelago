@@ -30,13 +30,13 @@ declare(strict_types=1);
         $withdrawResult = withdrawTransferCode($_POST);
         if (isset($withdrawResult['transferCode'])) {
     ?>
-            <p class="withdrawal">Your transfercode: <?= $withdrawResult['transferCode']; ?></p>
-            <p class="withdrawal">Your amount: <?= $withdrawResult['amount']; ?></p>
+            <p class="withdrawal">Your transfercode: <?= $withdrawResult['transferCode']; ?><br>
+            Your amount: <?= $withdrawResult['amount']; ?></p>
     <?php } else if (!isset($withdrawResult['transferCode'])) {
             foreach ($_SESSION['messages'] as $error) {
                 echo 'Error: ' . $error . ' Please try again.';
             }
-            unset($_SESSION['messages']);
+            unset($_POST['atm-submit']);
         }
     }
     ?>
