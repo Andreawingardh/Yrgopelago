@@ -22,3 +22,13 @@ section#hotel-rooms-description {
     flex-shrink: 0;
     object-fit: cover;
 }
+
+.room-buttons {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+}
+
+.room-buttons a {
+    text-decoration: none;
+}
