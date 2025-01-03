@@ -59,7 +59,9 @@ fieldset {
 }
 
 p.withdrawal {
-    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: solid 1px var(--secondary-color);
 }
 
 .error {

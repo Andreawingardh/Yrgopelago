@@ -92,8 +92,8 @@ select {
 
 section#atm {
     display: flex;
-    width: 31.3125rem;
-    height: 41.125rem;
+    max-width: 30rem;
+    height: fit-content;
     padding: 3.125rem 0rem;
     flex-direction: column;
     justify-content: center;
@@ -117,4 +117,10 @@ section#atm p, section#atm h2 {
     height: fit-content;
     padding: 1rem;
     text-align: center;
+}
+
+p.withdrawal {
+    width: fit-content;
+    padding: 2rem;
+    height: fit-content;
 }

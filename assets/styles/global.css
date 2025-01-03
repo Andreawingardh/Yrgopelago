@@ -20,10 +20,6 @@ body {
     width:100%;
 }
 
-hr {
-    border: 2px solid;
-}
-
 main {
     display: flex;
     max-width: min(90%, 1200px);
@@ -33,6 +29,12 @@ main {
     gap: 2rem;
     margin: auto;
 }
+
+
+hr {
+    border: 2px solid;
+}
+
 
 
 hr {
