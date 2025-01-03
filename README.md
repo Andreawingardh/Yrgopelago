@@ -4,9 +4,9 @@
 - [x] Find a name for your hotel.
 - [ ] Setup a subdomain for your site, preferably on your one.com-account.
 - [x] Use your startcode at the central bank of Yrgopelago to get your own, secret and extremly valuable API_KEY. Please keep it in the .env in your project.
-- [ ] Build a tiny website or just a web page for your hotel (see requirements below)
+- [x] Build a tiny website or just a web page for your hotel (see requirements below)
 - [x] Register your island and hotel at the central bank of yrgopelago using your API_KEY
-- [ ] Create a database for your hotel, so that you can store information about your visitors arrival and departure date, which room they will be staying in and such information.
+- [x] Create a database for your hotel, so that you can store information about your visitors arrival and departure date, which room they will be staying in and such information.
 
 ## REQUIREMENTS:
 Below you'll find a list of requirements which need to be fulfilled in order to complete the project.
@@ -26,9 +26,9 @@ Below you'll find a list of requirements which need to be fulfilled in order to 
 ## RULES:
 
 - [x] Every hotel has exactly three single rooms (budget, standard and luxury), so you can only have three guests at the same time.
-- [ ] As a manager, you set the price for your three rooms, but you should probably adjust the price according to the room standard and the star rating of the hotel. The more stars, the higher the cost.
+- [x] As a manager, you set the price for your three rooms, but you should probably adjust the price according to the room standard and the star rating of the hotel. The more stars, the higher the cost.
 - [x] The hotel website must have a form where visitors can book a room.
-- [ ] As a manager, you will check for how many stars your hotel is qualified to, and the hotel website should display this info.
+- [x] As a manager, you will check for how many stars your hotel is qualified to, and the hotel website should display this info.
 
 ## STARS:
 - [x] ☆ The hotel website has a graphical presentation of the availibility of the three rooms. (There's some nice packages that can simplify that part. Try to google php package calendar
