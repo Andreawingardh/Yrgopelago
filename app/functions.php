@@ -96,7 +96,7 @@ function isValidUuid(string $uuid): bool
 
 /*This function checks availability of hotel rooms */
 
-function checkAvailability(array $bookingData): int
+function checkAvailability(array $bookingData): int | string
 {
     $database = $bookingData['database'];
     $checkInDate = $bookingData['check-in-date'];
@@ -315,7 +315,7 @@ function createJsonReceipt(array $bookingData)
 
     $_SESSION['messages']['receipt'] = '/app/bookings/receipt.json';
     $_SESSION['messages']['image'] = 'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTV2cW8xOHJyZTgzdXVocTZmbXdsM3NyNXplNDVxcWd5azhvNWNzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LD7LJhWI2u1lqf5oUD/giphy.gif';
-    return redirect('/');
+    return redirect('/#successful-booking');
 }
 
 /* Function to show calendar */
