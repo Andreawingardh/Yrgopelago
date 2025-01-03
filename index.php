@@ -8,14 +8,14 @@ session_start();
 
 
 <?php
-require __DIR__ .'/header.php';?>
-<?php require __DIR__ .'/rooms.php'; ?>
+require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/rooms.php'; ?>
 <hr>
-<?php require __DIR__ . '/calendar.php'; ?>
+<?php require __DIR__ . '/views/calendar.php'; ?>
 <hr>
 <!-- require __DIR__ . '/atm.php'; ?> -->
 <!-- <hr> -->
-<?php require __DIR__ . '/form.php';?>
+<?php require __DIR__ . '/views/form.php'; ?>
 <hr>
-<?php require __DIR__ . '/footer.php';
+<?php require __DIR__ . '/views/footer.php';
 ?>
