@@ -46,7 +46,7 @@ function withdrawTransferCode(array $formData): array
 
 /* This function creates an array of the booking data */
 
-function getBookingData($formData)
+function getBookingData(array $formData): array
 {
 
     $database = new PDO('sqlite:' . __DIR__ . '/database/database.db');
@@ -96,7 +96,7 @@ function isValidUuid(string $uuid): bool
 
 /*This function checks availability of hotel rooms */
 
-function checkAvailability($bookingData)
+function checkAvailability(array $bookingData): int
 {
     $database = $bookingData['database'];
     $checkInDate = $bookingData['check-in-date'];
@@ -126,7 +126,7 @@ function checkAvailability($bookingData)
 }
 
 /* This function gets total cost of booking */
-function getTotalCost($bookingData)
+function getTotalCost(array $bookingData): int
 {
     $database = $bookingData['database'];
     $roomID = $bookingData['room-id'];
@@ -164,7 +164,7 @@ function getTotalCost($bookingData)
 
 /* This functions checks the validity of the transfercode */
 
-function checkTransferCode($bookingData)
+function checkTransferCode(array $bookingData): array | string
 {
     $transferCode = $bookingData['transfer-code'];
     $totalCost = $bookingData['total-cost'];
@@ -196,7 +196,7 @@ function checkTransferCode($bookingData)
 
 
 /* This function deposits the transfer code */
-function depositTransferCode($transferCode)
+function depositTransferCode(string $transferCode): string
 {
     try {
 
@@ -223,7 +223,7 @@ function depositTransferCode($transferCode)
 
 
 /* This function sends the booking data to the database */
-function sendBookingData($bookingData)
+function sendBookingData(array $bookingData)
 {
 
     $database = $bookingData['database'];
@@ -272,7 +272,7 @@ function sendBookingData($bookingData)
 }
 
 /* This function writes the data to a json-file and sends the user a link */
-function createJsonReceipt($bookingData)
+function createJsonReceipt(array $bookingData)
 {
 
     $database = $bookingData['database'];
@@ -319,7 +319,7 @@ function createJsonReceipt($bookingData)
 }
 
 /* Function to show calendar */
-function getCalendar($roomID)
+function getCalendar(int $roomID)
 {
     $database = new PDO('sqlite:' . __DIR__ . '/database/database.db');
     $calendar = new Calendar;
