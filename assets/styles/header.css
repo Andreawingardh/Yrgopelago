@@ -1,9 +1,7 @@
 header {
-    max-width:100vw;
+    max-width:100%;
     height: 25rem;
-    background: url('/assets/images/header-image.png') lightgray -5.909px -296px / 100.41% 201.003% no-repeat;
-    object-fit: cover;
-    overflow-x: hidden;
+    background: url('../images/header-image.png') lightgray center center / cover no-repeat;
     position: relative;
     display: flex;
 }
@@ -12,6 +10,12 @@ header {
     position: absolute;
     bottom: 220px;
     left: 50px;
+}
+
+.stars-display {
+    display: flex;
+    width: 60%;
+    justify-content: center;
 }
 
 #intro {
@@ -39,18 +43,12 @@ nav {
     position: absolute;
     bottom: 0;
     left: 25%;
-    font-family: var(--text-header);
-    background-color: rgb(231, 231, 231, 0.7);
+
 }
 
 nav a {
-    color: white;
+    border: 4px dashed;
     text-decoration: none;
     font-weight: bold;
-    border: 4px dashed var(--secondary-color);
     padding: 1rem;
-}
-
-nav a:visited {
-    color: var(--primary-color);
 }

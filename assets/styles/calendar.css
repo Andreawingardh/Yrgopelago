@@ -1,5 +1,5 @@
 section#calendar {
-    width: 40%;
+    width: 100%;
     display: flex;
     height: fit-content;
     padding: 3.125rem 0rem;
@@ -16,8 +16,6 @@ section#calendar {
 }
 
 .calendar {
-    background: #993434;
-    color: #FFF;
     width: 100%;
     font-family: 'Inter';
     table-layout: fixed;
