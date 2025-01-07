@@ -9,10 +9,11 @@ session_start();
 
 <?php
 require __DIR__ . '/views/header.php'; ?>
+<hr>
 <?php require __DIR__ . '/views/rooms.php'; ?>
 <hr>
-<?php require __DIR__ . '/views/calendar.php'; ?>
-<hr>
+<!--  require __DIR__ . '/views/calendar.php'; ?>
+<hr> -->
 <?php require __DIR__ . '/views/atm.php'; ?>
 <hr>
 <?php require __DIR__ . '/views/form.php'; ?>
