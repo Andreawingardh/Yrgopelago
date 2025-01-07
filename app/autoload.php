@@ -19,3 +19,5 @@ $_SESSON['messages'] = [];
 
 //Create error array 
 $_SESSION['errors'] = [];
+
+define('BASE_URL', '/Yrgopelago');
