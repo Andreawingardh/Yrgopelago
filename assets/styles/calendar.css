@@ -2,7 +2,7 @@ section#calendar {
     width: 100%;
     display: flex;
     height: fit-content;
-    padding: 3.125rem 0rem;
+    /* padding: 3.125rem 0rem; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
