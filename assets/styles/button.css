@@ -1,6 +1,6 @@
 button {
     display: flex;
-    height: 1.875rem;
+    height: fit-content;
     padding: 0.625rem;
     justify-content: center;
     align-items: center;
@@ -24,3 +24,4 @@ div.display-buttons {
     width: 100%;
     display: flex;
 }
+
