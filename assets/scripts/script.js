@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const timeDifference = end.getTime() - start.getTime();
         
         // Convert milliseconds to days
-        const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+        const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)) + 1;
         
         return daysDifference;
     }
