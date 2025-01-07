@@ -8,13 +8,15 @@ use benhall14\phpCalendar\Calendar as Calendar;
 use GuzzleHttp\Exception\ClientException;
 
 
+
+
 /* This function allows the user to create a transfer code */
 
 function withdrawTransferCode(array $formData): array
 {
 
     $user = trim(htmlspecialchars($formData['user']));
-    $apiKey = trim(htmlspecialchars($formData['api-key']));
+    $apiKey = trim(htmlspecialchars($formData['api_key']));
     $amount = trim(htmlspecialchars($formData['amount']));
 
     try {
