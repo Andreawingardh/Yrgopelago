@@ -1,7 +1,7 @@
 <section id="hotel-rooms-description">
     <article>
         <div>
-            <h2>No Money In The Bank, Gotta Get to Clowning Budget Singles ($1)</h2>
+            <h2>No Money In The Bank, Gotta Get to Clowning Budget Single ($1)</h2>
             <p>We get it, you’re spending all your time clowning, but the money just isn’t rolling in like you hoped. Maybe you need to bring a friend to even afford a stay at our hotel? We’ve got just the room for you! No closets, water or otherwise are available in this room and the window faces the so-called elephant dumping ground. But at least you’re not sleeping in your own bed!</p>
             <div class="room-buttons"><button id="budget-button">Check dates</button><button id="budget-booking-button">Book room</button></div>
         </div>
