@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 ?>
 <section id=hotel-booking>
+    <section class="booking-information">
+    <form id="hotel-booking-form" action="app/bookings/booking.php" method="post">
     <h2>Book a room!</h2>
     <p>Ready to get clowning? Book a room with us today!</p>
-
     <?php
     if (!empty($_SESSION['errors'])) {
     ?><div class="error">
@@ -19,10 +20,7 @@ declare(strict_types=1);
         </div>
     <?php
     }
-
-    ?>
-
-    <form id="hotel-booking-form" action="app/bookings/booking.php" method="post">
+?>
         <fieldset>
             <legend>What's your name?</legend>
             <input type="text" name="tourist" label="name"></input>
@@ -31,9 +29,9 @@ declare(strict_types=1);
             <legend>Choose your room</legend>
             <select name="room_id" id="hotel-rooms" required>
                 <option value="">Please choose room</option>
-                <option value="1">Budget</option>
-                <option value="2">Standard</option>
-                <option value="3">Luxury</option>
+                <option value="1">No Money In The Bank, Gotta Get to Clowning Budget Single ($1)</option>
+                <option value="2">Clown All Day Sleep All Night Superior Double ($2)</option>
+                <option value="3">Ultra Deluxe Manic Circus Suite ($3)</option>
             </select>
         </fieldset>
         <fieldset>
@@ -44,13 +42,13 @@ declare(strict_types=1);
         <fieldset>
             <legend>Choose your features</legend>
             <div class="checkbox"><input type="checkbox" class="feature" name="feature_id[]" value="1" />
-                <label for="feature1">Ping pong table ($2)</label>
+                <label for="Ping pong table">Ping pong table ($2)</label>
             </div>
             <div class="checkbox"><input type="checkbox" class="feature" name="feature_id[]" value="2" />
-                <label for="feature2">Yatzy ($1)</label>
+                <label for="Yatzy">Yatzy ($1)</label>
             </div>
             <div class="checkbox"><input type="checkbox" class="feature" name="feature_id[]" value="3" />
-                <label for="feature3">Unicycle ($2)</label>
+                <label for="Unicyle">Unicycle ($2)</label>
             </div>
         </fieldset>
         <fieldset>
@@ -62,6 +60,8 @@ declare(strict_types=1);
         </fieldset>
         <button type="submit" name="hotel-booking-submit">Book your room!</button>
     </form>
+    <?php require __DIR__ . '/calendar.php'; ?>
+    </section>
     <?php
 
 
