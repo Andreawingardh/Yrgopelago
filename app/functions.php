@@ -31,7 +31,6 @@ function withdrawTransferCode(array $formData): array
         $body = $res->getBody();
         $stringBody = (string) $body;
         $withdrawResult = json_decode($stringBody, true);
-        // var_dump($withdrawResult);
         return $withdrawResult;
     } catch (ClientException $e) {
         /* If the fetch returns an error response, this code gets the contents of the response and adds it to $_SESSION['messages'] */
@@ -104,7 +103,7 @@ function checkAvailability(array $bookingData): int | string
     $roomID = $bookingData['room-id'];
 
 
-    if ($checkOutDate > $checkInDate) {
+    if ($checkOutDate >= $checkInDate) {
         /* This checks if there is availability in the room at the given dates */
         $statement = $database->prepare("SELECT COUNT(*) as availability FROM bookings
         WHERE room_id = :room_id
@@ -119,9 +118,9 @@ function checkAvailability(array $bookingData): int | string
         /* $availability returns 0 if there is an availability, a higher number if the room is booked */
         $availability = $statement->fetchColumn();
         return $availability;
-    } else{
-    return $_SESSION['errors'][] = "Your dates are reversed";
-    redirect('/#hotel-booking');
+    } else {
+        $_SESSION['errors'][] = "Your dates are reversed";
+        return redirect(BASE_URL . '/index.php#hotel-booking');
     }
 }
 
@@ -153,11 +152,12 @@ function getTotalCost(array $bookingData): int
     }
 
     /* This converts the dates to UNIX time */
-    $totalDays = (strtotime($checkOutDate) - strtotime($checkInDate)) / (60 * 60 * 24);
+    $totalDays = ((strtotime($checkOutDate) - strtotime($checkInDate)) / (60 * 60 * 24)) + 1;
 
     /* This calculates the room stay + the cost of feature*/
     $totalCost = ($roomCost * $totalDays) + $totalFeatureCost;
-    $bookingData['total-cost'] = $totalCost; '.';
+    $bookingData['total-cost'] = $totalCost;
+    '.';
 
     return $bookingData['total-cost'];
 }
@@ -189,8 +189,8 @@ function checkTransferCode(array $bookingData): array | string
         $errorContent = $response->getBody()->getContents();
 
         $errorMessage = json_decode($errorContent, true);
-        return $_SESSION['errors'][] = $errorMessage['error'];
-        redirect('/#hotel-booking');
+        $_SESSION['errors'][] = $errorMessage['error'];
+        return redirect(BASE_URL . '/index.php#hotel-booking');
     }
 }
 
@@ -215,8 +215,8 @@ function depositTransferCode(string $transferCode): string
         $errorContent = $response->getBody()->getContents();
 
         $errorMessage = json_decode($errorContent, true);
-        return $_SESSION['errors'][] = $errorMessage['error'];
-        redirect('/#hotel-booking');
+        $_SESSION['errors'][] = $errorMessage['error'];
+        return redirect(BASE_URL . '/index.php#hotel-booking');
     }
 }
 
@@ -313,9 +313,9 @@ function createJsonReceipt(array $bookingData)
 
     file_put_contents('receipt.json', json_encode($receipt));
 
-    $_SESSION['messages']['receipt'] = '/app/bookings/receipt.json';
+    $_SESSION['messages']['receipt'] = BASE_URL . '/app/bookings/receipt.json';
     $_SESSION['messages']['image'] = 'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTV2cW8xOHJyZTgzdXVocTZmbXdsM3NyNXplNDVxcWd5azhvNWNzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LD7LJhWI2u1lqf5oUD/giphy.gif';
-    return redirect('/#successful-booking');
+    return redirect(BASE_URL . '/index.php#successful-booking');
 }
 
 /* Function to show calendar */
