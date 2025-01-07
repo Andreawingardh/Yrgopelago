@@ -4,7 +4,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 2.25rem;
     flex-wrap: wrap;
 }
@@ -13,15 +13,15 @@ section#hotel-booking {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.3125rem;
-    width: 50%;
+    gap: 1rem;
+    width: 90%;
     height: fit-content;
 }
 
 #hotel-booking-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     width: 100%;
 }
 
@@ -107,7 +107,12 @@ section#atm p, section#atm h2 {
     text-align: center;
 }
 
-
+form#withdraw-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
 
 .error {
     display: flex;
@@ -123,4 +128,11 @@ p.withdrawal {
     width: fit-content;
     padding: 2rem;
     height: fit-content;
+}
+
+.booking-information {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 2rem;
 }
