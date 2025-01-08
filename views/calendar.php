@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 
 
-<section id="pre-booking">
+
 
     <section id="calendar">
         <h2>Calendar</h2>
@@ -23,4 +23,3 @@ declare(strict_types=1);
         </div>
         <script src="/assets/scripts/script.js"></script>
     </section>
-</section>
