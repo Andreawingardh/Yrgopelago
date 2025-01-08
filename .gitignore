@@ -1,15 +1,11 @@
 .env
 vendor
-database
+database.db
 .DS_Store
 app/.DS_Store
 users
 .DS_Store
 app/.DS_Store
-database/test.db
-
-app/bookings/receipt.json
-app/bookings/receipt.json
-app/.DS_Store
 *.json
 app/bookings/receipt.json
+app/bookings/tourist-logbook.txt
