@@ -12,7 +12,7 @@ $bookingData = getBookingData($_POST);
 $availability = checkAvailability($bookingData);
 
 if ($availability > 0) {
-    $_SESSION['errors'][] = 'Your dates are not available';
+    $_SESSION['errors'][] = 'Unfortunately, those dates are booked. Please try again. :)';
     redirect(BASE_URL . '/index.php#hotel-booking');
 }
 
@@ -22,7 +22,7 @@ $bookingData['total-cost'] = getTotalCost($bookingData);
 if (isValidUuid($bookingData['transfer-code'])) {
     $transferCodeResult = checkTransferCode($bookingData);
 }   else {
-    $_SESSION['errors'][] = 'Your transfer code is not valid';
+    $_SESSION['errors'][] = 'Oops, your transfer code is not valid!';
     redirect(BASE_URL . '/index.php#hotel-booking');
 
 }
