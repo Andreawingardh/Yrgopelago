@@ -1,0 +1,18 @@
+
+##Create hotel_rooms table
+CREATE TABLE IF NOT EXISTS hotel_rooms (id INTEGER PRIMARY KEY, hotel_room VARCHAR, room_cost int);
+
+## Insert into hotel rooms 
+INSERT INTO hotel_rooms (hotel_room, room_cost) VALUES ('Budget', 1), ('Standard', 2), ('Luxury', 3);
+
+## Create bookings table
+CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY autoincrement, tourist VARCHAR, room_id INTEGER, check_in_date DATE, check_out_date DATE, transfer_code VARCHAR(100), total_cost INTEGER);
+
+## Create features table
+CREATE TABLE IF NOT EXISTS features (id INTEGER PRIMARY KEY autoincrement, feature_item VARCHAR, feature_cost INTEGER);
+
+## Insert features into table
+INSERT INTO features (feature_item, feature_cost) VALUES ("Ping pong table", 2), ("Yatzy", 1), ("Unicycle", 2);
+
+##Create junction table booking_feature
+CREATE TABLE if not EXISTS booking_feature (id INTEGER PRIMARY KEY autoincrement, booking_id INTEGER REFERENCES booking(id), feature_id INTEGER REFERENCES features(id));
