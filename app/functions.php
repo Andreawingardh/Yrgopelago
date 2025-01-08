@@ -7,9 +7,6 @@ require __DIR__ . '/../vendor/autoload.php';
 use benhall14\phpCalendar\Calendar as Calendar;
 use GuzzleHttp\Exception\ClientException;
 
-
-
-
 /* This function allows the user to create a transfer code */
 
 function withdrawTransferCode(array $formData): array
@@ -87,7 +84,7 @@ function redirect(string $path)
 function isValidUuid(string $uuid): bool
 {
 
-    if (!is_string($uuid) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $uuid) !== 1)) {
+    if (!is_string(value: $uuid) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $uuid) !== 1)) {
         return false;
     }
 
@@ -154,12 +151,11 @@ function getTotalCost(array $bookingData): int
     }
 
     /* This converts the dates to UNIX time */
-    $totalDays = ((strtotime($checkOutDate) - strtotime($checkInDate)) / (60 * 60 * 24)) + 1;
+    $totalDays = (strtotime($checkOutDate) - strtotime($checkInDate)) / (60 * 60 * 24) + 1;
 
     /* This calculates the room stay + the cost of feature*/
-    $totalCost = ($roomCost * $totalDays) + $totalFeatureCost;
+    $totalCost = $roomCost * $totalDays + $totalFeatureCost;
     $bookingData['total-cost'] = $totalCost;
-    '.';
 
     return $bookingData['total-cost'];
 }
@@ -276,11 +272,9 @@ function sendBookingData(array $bookingData)
 /* This function writes the data to a json-file and sends the user a link */
 function createJsonReceipt(array $bookingData)
 {
-
     $database = $bookingData['database'];
     $features = $bookingData['features'] ?? [];
     $featuresInformation = [];
-
 
     $statement = $database->prepare("SELECT feature_item, feature_cost
         from features
@@ -321,7 +315,7 @@ function createJsonReceipt(array $bookingData)
 }
 
 /* Function to show calendar */
-function getCalendar(int $roomID)
+function getCalendar(int $roomID): void
 {
     $database = new PDO('sqlite:' . __DIR__ . '/database/database.db');
     $calendar = new Calendar;

@@ -8,14 +8,14 @@ declare(strict_types=1);
 <section id="atm">
     <h2>Want to make a withdrawal?</h2>
     <p>Here at Hotel de Pierrot we make it easy for you to get the money you need to book a room. The money is only a click away!</p>
-    <form id="withdraw-form" action="/Yrgopelago/index.php#atm" method="post">
+    <form id="withdraw-form" action="/clown-island/index.php#atm" method="post">
         <fieldset>
             <legend>Name:</legend>
             <input type="text" name="user" label="user"></input>
         </fieldset>
         <fieldset>
-            <legend>Enter your API-code:</legend>
-            <input type="text" id="api-key" name="api-key" required></input>
+            <legend>Enter your API-key:</legend>
+            <input type="text" id="api_key" name="api_key" required></input>
         </fieldset>
         <fieldset>
             <legend>Amount:</legend>

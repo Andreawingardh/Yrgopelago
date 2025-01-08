@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Define feature prices
     const featurePrices = {
-        '1': 2,    // Feature1
-        '2': 1,    // Feature2
-        '3': 2     // Feature3
+        '1': 2,    // Ping pong table
+        '2': 1,    // Yatzy
+        '3': 2     // Unicycle
     };
 
     // Select necessary elements
@@ -25,16 +25,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const start = new Date(startDate);
         const end = new Date(endDate);
         
-        // Calculate the time difference in milliseconds
+        // Calculate the time difference
         const timeDifference = end.getTime() - start.getTime();
         
-        // Convert milliseconds to days
+        // Convert to days
         const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)) + 1;
         
         return daysDifference;
     }
 
-    // Function to calculate total cost
+    // This function calculates total cost dynamically as user fills in form
     function calculateTotalCost() {
         // Validate dates are selected
         if (!checkInDateInput.value || !checkOutDateInput.value) {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Calculate number of days
         const numberOfDays = calculateDaysBetween(checkInDateInput.value, checkOutDateInput.value);
 
-        // Validate number of days (prevent negative or zero days)
+        // Validate number of days (prevent negative days)
         if (numberOfDays <= 0) {
             totalCostDisplay.textContent = 'Total cost: Oops! Those days don\'t seem to line up.';
             return;
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalCost = (selectedRoomPrice * numberOfDays) + (featureCost);
 
         // Update total cost display
-        totalCostDisplay.textContent = `Total cost: $${totalCost} (${numberOfDays} nights)`;
+        totalCostDisplay.textContent = `Total cost: $${totalCost} (${numberOfDays} days)`;
     }
 
     // Add event listeners
@@ -83,9 +83,10 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateTotalCost();
 });
 
+/* This function shows the different calendars when different buttons are clicked and the rooms selected in the dropdown menu in the form. */
 
 function showCalendar() {
-    //This 
+    //This creates variables for room calendars
     const budgetRoom = document.getElementById("budget-room");
     const standardRoom = document.getElementById("standard-room");
     const luxuryRoom = document.getElementById("luxury-room");
@@ -216,6 +217,4 @@ function moveToBooking() {
     })
 }
 
-
 moveToBooking();    
-

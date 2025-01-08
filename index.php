@@ -4,6 +4,7 @@ declare(strict_types=1);
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/vendor/autoload.php';
 session_start();
+
 ?>
 
 
@@ -12,8 +13,6 @@ require __DIR__ . '/views/header.php'; ?>
 <hr>
 <?php require __DIR__ . '/views/rooms.php'; ?>
 <hr>
-<!--  require __DIR__ . '/views/calendar.php'; ?>
-<hr> -->
 <?php require __DIR__ . '/views/atm.php'; ?>
 <hr>
 <?php require __DIR__ . '/views/form.php'; ?>

@@ -20,7 +20,6 @@
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <header>
-    <!-- <nav><a href="#hotel-rooms-description">Our rooms</a><a href="#calendar">Calendar</a><a href="#atm">Withdrawal</a><a href="#hotel-booking">Book</a></nav> -->
 </header>
 <svg id="header-logo" width="180px" height="131px" viewBox="0 0 180 131" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="Logo">
