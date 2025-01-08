@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// Start the session engines.
+// // Start the session engines.
 // session_start();
 
 // Set the default timezone to Coordinated Universal Time.
@@ -20,4 +20,5 @@ $_SESSON['messages'] = [];
 //Create error array 
 $_SESSION['errors'] = [];
 
-define('BASE_URL', '/Yrgopelago');
+//Define base URL
+define('BASE_URL', '/clown-island');
