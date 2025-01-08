@@ -1,8 +1,17 @@
 # YRGOPELAGO Assignment
+This repository is a project for the PHP course in the Web Developer program at YRGO Higher Vocational School in Gothenburg. The project has a MIT license. The purpose of the project was to build a hotel website, where classmates could book rooms using transfercodes generated at an API-endpoint.
+
+The project uses PHP, SQLite and Javascript, along with HTML and CSS for frontend.
+
+The following Composer packages have been used in the website:
+* vlucas/phpdotenv
+* guzzlehttp/guzzle
+* benhall14/php-calendar
+* 
 ## NEEDS:
 - [x] Create an island. Pick from your own imagination or check out a list of fictional islands
 - [x] Find a name for your hotel.
-- [ ] Setup a subdomain for your site, preferably on your one.com-account.
+- [x] Setup a subdomain for your site, preferably on your one.com-account.
 - [x] Use your startcode at the central bank of Yrgopelago to get your own, secret and extremly valuable API_KEY. Please keep it in the .env in your project.
 - [x] Build a tiny website or just a web page for your hotel (see requirements below)
 - [x] Register your island and hotel at the central bank of yrgopelago using your API_KEY
@@ -15,12 +24,12 @@ Below you'll find a list of requirements which need to be fulfilled in order to 
 - [x] Only desktop. No mobile.
 - [x] The application should be using a SQL (sqlite, MySQL etc) database.
 - [ ] The application should be pushed to a repository on GitHub. Please enter the url in your yrgopelago.md in your feedback/grade-repo. If private, you should invite hassehulabeck as collaborator.
-- [ ] The project should declare strict types in files containing only PHP code.
+- [x] The project should declare strict types in files containing only PHP code.
 - [ ] The project should not include any coding errors, warning or notices.
 - [x] The repository should have at least 20 commits and you have to commit at least once every time you're working on the project.
 - [ ] The repository must contain a README.md file with a description of the project and possibly instructions for installation (if needed).
 - [x] The repository must contain a LICENSE file.
-- [ ] You must follow the four hotel rules below
+- [x] You must follow the four hotel rules below
 - [ ] The project must receive a code review by another student. Add at least 7 comments to the student's README.md file through a pull request. Give feedback to the student below your name. The last student gives feedback to the first student in the list. Add your feedback after lunch at january 10th. A code review line could look like this:
 
 ## RULES:
