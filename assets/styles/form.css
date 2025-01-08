@@ -1,13 +1,14 @@
-/* Styling for the booking form */
 
-#pre-booking {
+/* Styling for wrapper for form and calendar */
+
+.booking-information {
     display: flex;
     width: 100%;
-    justify-content: center;
     align-items: flex-start;
-    gap: 2.25rem;
-    flex-wrap: wrap;
+    gap: 2rem;
 }
+
+/* Styling for the booking form */
 
 section#hotel-booking {
     display: flex;
@@ -23,11 +24,6 @@ section#hotel-booking {
     flex-direction: column;
     gap: 1rem;
     width: 100%;
-}
-
-fieldset legend {
-    width:auto;
-    display: inline-block;
 }
 
 input {
@@ -50,23 +46,15 @@ input.feature {
     margin: 1rem;
 }
 
-input label {
-
-}
 
 fieldset {
     max-width: 100%;
     overflow: scroll;
 }
 
-fieldset * {
-    width: 100%;
-}
-
-
-
-section#hotel-booking button {
-    margin:auto;
+fieldset legend {
+    width:auto;
+    display: inline-block;
 }
 
 select {
@@ -118,10 +106,10 @@ form#withdraw-form {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:200px;
     height: fit-content;
     padding: 1rem;
     text-align: center;
+    border-radius: 0.625rem;
 }
 
 p.withdrawal {
@@ -130,9 +118,3 @@ p.withdrawal {
     height: fit-content;
 }
 
-.booking-information {
-    display: flex;
-    width: 100%;
-    align-items: flex-start;
-    gap: 2rem;
-}

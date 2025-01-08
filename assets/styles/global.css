@@ -12,7 +12,6 @@
     box-sizing: border-box;
     margin: 0;
     border: 0;
-    /* border: red solid 1px; */
     overflow-x: scroll;
 }
 
@@ -30,14 +29,9 @@ main {
     margin: auto;
 }
 
-
 hr {
     border: 2px solid;
-}
-
-
-
-hr {
     width:40%;
     margin: auto;
 }
+

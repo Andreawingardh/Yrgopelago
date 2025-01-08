@@ -25,3 +25,17 @@ div.display-buttons {
     display: flex;
 }
 
+section#hotel-booking button {
+    margin:auto;
+}
+
+
+.room-buttons {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+} 
+
+.room-buttons a {
+    text-decoration: none;
+}

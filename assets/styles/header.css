@@ -33,7 +33,7 @@ header {
     max-width: 58rem;
 }
 
-nav {
+/* nav {
     margin: auto;
     display: flex;
     width: fit-content;
@@ -51,4 +51,4 @@ nav a {
     text-decoration: none;
     font-weight: bold;
     padding: 1rem;
-}
+} */

@@ -28,7 +28,7 @@ h2 {
 }
 
 #header-h3 {
-    font-family: 'Long Cang';
+    font-family: var(--subtitle-font);
     font-size: 3rem;
     text-align: center;
     font-weight: 200;
