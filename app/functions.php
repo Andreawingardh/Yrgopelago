@@ -109,7 +109,7 @@ function checkAvailability(array $bookingData): int | string
         /* This checks if there is availability in the room at the given dates */
         $statement = $database->prepare("SELECT COUNT(*) as availability FROM bookings
         WHERE room_id = :room_id
-        AND (check_in_date < :check_out_date AND check_out_date > :check_in_date);");
+        AND (check_in_date <= :check_out_date AND check_out_date >= :check_in_date);");
 
         /* Binds the relevant variables to the parameters */
         $statement->bindParam(':room_id', $roomID, PDO::PARAM_INT);
