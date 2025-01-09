@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-require '../autoload.php';
-
-session_start();
+require __DIR__ . '/../autoload.php';
+// session_start();
 
 if (isset($_POST['hotel-booking-submit'])) {
 $bookingData = getBookingData($_POST);
