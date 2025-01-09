@@ -1,168 +1,36 @@
 # YRGOPELAGO Assignment
-This repository is a project for the PHP course in the Web Developer program at YRGO Higher Vocational School in Gothenburg. The project has a MIT license. The purpose of the project was to build a hotel website, where classmates could book rooms using transfercodes generated at an API-endpoint.
+This repository is a project for the PHP course in the Web Developer program at YRGO Higher Vocational School in Gothenburg. The project has a MIT license. The purpose of the project was to build a hotel website, where classmates could book rooms using transfercodes generated at an API-endpoint. More information can be found at [Yrgopelago](https://www.yrgopelago.se/). Part of the assignment was a competition where you could win different prizes based on visting others' hotels, highest occupancy rate, best frontend and most money left.
 
-The project uses PHP, SQLite and Javascript, along with HTML and CSS for frontend.
+The project was built using PHP, SQLite, Javascript and CSS.
 
 The following Composer packages have been used in the website:
-* vlucas/phpdotenv
-* guzzlehttp/guzzle
-* benhall14/php-calendar
-* 
-## NEEDS:
-- [x] Create an island. Pick from your own imagination or check out a list of fictional islands
-- [x] Find a name for your hotel.
-- [x] Setup a subdomain for your site, preferably on your one.com-account.
-- [x] Use your startcode at the central bank of Yrgopelago to get your own, secret and extremly valuable API_KEY. Please keep it in the .env in your project.
-- [x] Build a tiny website or just a web page for your hotel (see requirements below)
-- [x] Register your island and hotel at the central bank of yrgopelago using your API_KEY
-- [x] Create a database for your hotel, so that you can store information about your visitors arrival and departure date, which room they will be staying in and such information.
+* [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) - for .env-files
+* [guzzlehttp/guzzle](https://github.com/guzzle/guzzle) - for fetching API endpoints
+* [benhall14/php-calendar](https://github.com/benhall14/php-calendar) - for building a calendar
 
-## REQUIREMENTS:
-Below you'll find a list of requirements which need to be fulfilled in order to complete the project.
+To check out the website live, visit: [Hotel de Pierrot](https://andreawingardh.se/clown-island).
 
-- [x] The application should be developed using HTML, CSS, SQL and PHP. Add a bit of javaScript if needed.
-- [x] Only desktop. No mobile.
-- [x] The application should be using a SQL (sqlite, MySQL etc) database.
-- [ ] The application should be pushed to a repository on GitHub. Please enter the url in your yrgopelago.md in your feedback/grade-repo. If private, you should invite hassehulabeck as collaborator.
-- [x] The project should declare strict types in files containing only PHP code.
-- [ ] The project should not include any coding errors, warning or notices.
-- [x] The repository should have at least 20 commits and you have to commit at least once every time you're working on the project.
-- [ ] The repository must contain a README.md file with a description of the project and possibly instructions for installation (if needed).
-- [x] The repository must contain a LICENSE file.
-- [x] You must follow the four hotel rules below
-- [ ] The project must receive a code review by another student. Add at least 7 comments to the student's README.md file through a pull request. Give feedback to the student below your name. The last student gives feedback to the first student in the list. Add your feedback after lunch at january 10th. A code review line could look like this:
+## Description
+The hotel allows the user to book one of three hotel rooms, along with a choice of features. Rooms are charged per day and features are charged per booking. The calendar available on the website displays the available dates for the user. Both the calendar and the booking form are connected to a database which stores prior bookings.
 
-## RULES:
+When a user books, they must generate a transfer code using their own API-key. This is done at https://www.yrgopelago.se/centralbank but can also be done on the website using the Withdrawal form. When this form is used, it sends a post request to the API endpoint https://www.yrgopelago.se/centralbank/withdraw. If the user and the API-key, it generates a transfer code with the specified amount. The name and the generated transfer code are then dynamically added into the booking form.
 
-- [x] Every hotel has exactly three single rooms (budget, standard and luxury), so you can only have three guests at the same time.
-- [x] As a manager, you set the price for your three rooms, but you should probably adjust the price according to the room standard and the star rating of the hotel. The more stars, the higher the cost.
-- [x] The hotel website must have a form where visitors can book a room.
-- [x] As a manager, you will check for how many stars your hotel is qualified to, and the hotel website should display this info.
+When the booking form is filled in and submitted, the dates are first checked against prior bookings in the database. If the dates are already booked, an error message is presented to the user. After this, the total cost is generated. The website then uses Guzzle to send a POST request to the API-endpoint at https://www.yrgopelago.se/centralbank/transferCode with the transfer code and total cost. If the generated transfer code is correct, the dates are entered into the database. If the transfer code is not correct or has already been used or the total cost doesn't match the cost associated with the transfer code, an error message is generated for the user.
 
-## STARS:
-- [x] ☆ The hotel website has a graphical presentation of the availibility of the three rooms. (There's some nice packages that can simplify that part. Try to google php package calendar
-- [ ] ☆ The hotel can give discounts, for example, how about 30% off for a visit longer than three days?
-- [x] ☆ The hotel can offer at least three features that a visitor can pay for. You can create your own features, but checkout the different features that are listed at Awards - Points for the tourist, as they will be more valuable for the tourists. Note: A hotel cannot offer all the features that makes an accepted set. (For example, your hotel cannot offer bicycle, unicycle and rollerblades).
-- [x] ☆ The hotel has the ability to use external data (images, videos, text etc) when producing succesful booking responses that the customers get.
-- [ ] ☆ The hotel manager has an admin.php page - accessible only by using your API_KEY - where different data can be altered, such as room prices, the star rating, discount levels and whatever you can think of.
+Once the transfer code has been checked and the POST request is successfull, the transfercode is deposited at https://www.yrgopelago.se/centralbank/deposit, the booking data is added to database.db and a .json-file is generated with all the relevant details from the booking. The user is then redirected back to the index.php page. This receipt can then be saved by the user in their logbook.
 
-## HOTEL BUILD INSTRUCTIONS
-- [x] Our hotel MUST give a response to every succesful booking. The response should be in json and MUST have the following properties:
-```
-    island
-    hotel
-    arrival_date
-    departure_date
-    total_cost
-    stars
-    features
-    additional_info. (This last property is where you can put in a personal greeting from your hotel, an image URL or whatever you like.)
+![Robert de Niro](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTV2cW8xOHJyZTgzdXVocTZmbXdsM3NyNXplNDVxcWd5azhvNWNzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LD7LJhWI2u1lqf5oUD/giphy.gif)
 
-{
-  "island": "Main island",
-  "hotel": "Centralhotellet",
-  "arrival_date": "2025-01-12",
-  "departure_date": "2025-01-17",
-  "total_cost": "12",
-  "stars": "3",
-  "features": [
-    {
-      "name": "sauna",
-      "cost": 2
-    }
-  ],
-  "addtional_info": {
-    "greeting": "Thank you for choosing Centralhotellet",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg"
-  }
-}
-```
-- [x] The booking calendar MUST be fixed to show only january 2025. Use attributes min and max in the input.
+## Installation
+Clone the repository on your local machine in an appropriate folder:
+``` git clone https://github.com/Andreawingardh/Yrgopelago.git ```
 
-- [x] For a bit of simplicity, all bookings is only stored as whole days, meaning that a tourist books a room the entire day.
+Navigate to the folder:
+```cd Yrgopelago ```
 
-- [x] Your hotel MUST check availibilty of the requested room and dates before making the booking and sending the response package as json.
+Start a local host in the folder and navigate to index.php to view the website.
 
-- [x] Your hotel MUST check if a transferCode submitted by a tourist is valid (otherwise you won't get any money)
+To create your own database, follow the instructions in [Database-queries.txt](/app/database/database-queries.txt).
 
-## INFO:
-```
-$acceptedSets: [
-  ["bathtub", "pool", "sauna"],
-  ["pinball game", "ping pong table", "PS5"],
-  ["bicycle", "unicycle", "rollerblades"],
-  ["coffeemaker", "waterboiler", "mixer"],
-  ["rubiks cube", "deck of cards", "yatzy"],
-  ["gun", "rifle", "small cannon"],
-  ["tv", "radio", "speakers"],
-  ["minibar", "bar", "superior bar"]
-]);
-```
-
-# BUILD:
-
-## Back-end:
-
-### Structure
-- [x] Set up dev branch on GITHUB
-- [ x Create structure (inspiration from lesson on project structure)
-    - [x] Look into $config and autoload.php
-    - [x] Keep working on structure, it's currently not very good **Week 2**
-- [x] Get API-key and put it in .env-file
-    - [x] Add .env file to .gitignore
-
-
-### Database
-- [x] Test database construction (test)
-    - [x] Evaluate and improve if necessary
-- [x] Update database according to results from test-run **Week-2**
-- [x] Create test connection with website
-- [x] Think about how to create a junction table between features and booking
-
-### Calendar
-- [x] Find a calendar package and implement it (test)
-- [x] Connect to database
-- [x] Create a function to show availability in calendar
-
-### Form
-- [x] Present result in JSON format
-- [x] Send result to database
-    - [x]  Room data
-    - [x]  Feature data
-    - [x]  Dates  
-- [x] Create if-clauses to check: **Week 1**
-    - [x] Availability
-        - [x] Connect with database
-    - [x] Transfer code
-        - [x] Fetch API from Yrgocentralbanken.
-        - [x] Check transfer code with transferCode database endpoint
-        - [x] Deposit transfercode in deposit endpoint
-- [x] Do a calculation of total_cost **Week 2**
-- [x] Create a separate form for withdraw function? **It's currently not working**
-
-### Functions
-- [x] Test functions page (test)
-- [x] Change code into functions and add to booking.php **Week 2**
-
-### ETC
-
-## Front-end:
-### MARKUP
-- [x] Build form in markup with relevant inputs (test)
-    - [x] Arrival
-    - [x] Departure
-    - [x] Room
-    - [x] Features
-        - [x] Add real features into markup and database **Week 2**
-    - [x] Sum
-        - [x] Figure out how to show total cost before form is submitted. Javascript?? **Week 2**
-    - [ ] 
-### CSS
-- [x] Look into scroll issues
-
-### Javascript
-- [ ] Doublecheck the javascript functions
-
-### ETC
-- [x] Decide on name of island and hotel
+**Happy travels!**
 
