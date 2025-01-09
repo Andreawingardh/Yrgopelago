@@ -32,17 +32,3 @@ header {
 #intro p {
     max-width: 58rem;
 }
-
-/* nav {
-    margin: auto;
-    display: flex;
-    width: fit-content;
-    align-self: flex-end;
-    height: fit-content;
-    align-self: baseline;
-    position: absolute;
-    bottom: 0;
-    left: 25%;
-
-} */
-
