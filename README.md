@@ -17,7 +17,7 @@ When a user books, they must generate a transfer code using their own API-key. T
 
 When the booking form is filled in and submitted, the dates are first checked against prior bookings in the database. If the dates are already booked, an error message is presented to the user. After this, the total cost is generated. The website then uses Guzzle to send a POST request to the API-endpoint at https://www.yrgopelago.se/centralbank/transferCode with the transfer code and total cost. If the generated transfer code is correct, the dates are entered into the database. If the transfer code is not correct or has already been used or the total cost doesn't match the cost associated with the transfer code, an error message is generated for the user.
 
-Once the transfer code has been checked and the POST request is successfull, the transfercode is deposited at https://www.yrgopelago.se/centralbank/deposit, the booking data is added to database.db and a .json-file is generated with all the relevant details from the booking. The user is then redirected back to the index.php page. This receipt can then be saved by the user in their logbook.
+Once the transfer code has been checked and the POST request is successful, the transfercode is deposited at https://www.yrgopelago.se/centralbank/deposit, the booking data is added to database.db and a .json-file is generated with all the relevant details from the booking. The user is then redirected back to the index.php page. This receipt can then be saved by the user in their logbook.
 
 ![Robert de Niro](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTV2cW8xOHJyZTgzdXVocTZmbXdsM3NyNXplNDVxcWd5azhvNWNzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LD7LJhWI2u1lqf5oUD/giphy.gif)
 
