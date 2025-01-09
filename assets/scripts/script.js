@@ -1,21 +1,45 @@
 
-/* Variables for */
-const budgetCalendar = document.getElementById("budget-room");
-const standardCalendar = document.getElementById("standard-room");
-const luxuryCalendar = document.getElementById("luxury-room");
+/* Variables for calendars */
+const budgetCalendar = document.getElementById("budget-calendar");
+const standardCalendar = document.getElementById("standard-calendar");
+const luxuryCalendar = document.getElementById("luxury-calendar");
 
+//Variables for buttons in intro
+const introAtmButton = document.getElementById("intro-atm-button");
+const introBookNowButton = document.getElementById("intro-book-now-button");
 
+//Variables for Check dates buttons from room view
+const budgetCheckDateButton = document.getElementById("budget-check-date-button");
+const standardCheckDateButton = document.getElementById("standard-check-date-button");
+const luxuryCheckDateButton = document.getElementById("luxury-check-date-button");
 
+// Variables for buttons in calendar
+const budgetCalendarButton = document.getElementById("budget-calendar-button");
+const standardCalendarButton = document.getElementById("standard-calendar-button");
+const luxuryCalendarButton = document.getElementById("luxury-calendar-button");
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Define room prices
+// Variables for Book room buttons from room
+const budgetBookRoomButton = document.getElementById("budget-book-now-button");
+const standardBookRoomButton = document.getElementById("standard-book-now-button");
+const luxuryBookRoomButton = document.getElementById("luxury-book-now-button");
+
+//Variable for ATM view
+const atm = document.getElementById("atm");
+
+//Variable for hotel booking view
+const hotelBooking = document.getElementById("hotel-booking");
+
+//Variable for calendar view
+const calendar = document.getElementById("calendar");
+//Variables for the form
+    // Room prices
     const roomPrices = {
         '1': 1,   // Budget room
         '2': 2,  // Standard room
         '3': 3   // Luxury room
     };
 
-    // This defines feature prices
+    // Feature prices
     const featurePrices = {
         '1': 2,    // Ping pong table
         '2': 1,    // Yatzy
@@ -28,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalCostDisplay = document.getElementById('total-cost');
     const checkInDateInput = document.getElementById('check-in-date');
     const checkOutDateInput = document.getElementById('check-out-date');
+ 
+document.addEventListener('DOMContentLoaded', function() {
 
     // This calculates the number of days between two dates
     function calculateDaysBetween(startDate, endDate) {
@@ -93,140 +119,73 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-/* This function hides all calendars before displaying them */
+/* This function hides all calendars */
 function hideAllCalendars() {
     budgetCalendar.style.display = 'none';
     standardCalendar.style.display = 'none';
     luxuryCalendar.style.display = 'none';
 }
 
-/* This function shows the different calendars when different buttons are clicked and the rooms selected in the dropdown menu in the form. */
 
-function showCalendar() {
+hideAllCalendars();
+/* This function shows the different calendars when different buttons are clicked */
+function showCalendar(roomCalendarButton, checkDateButton, roomCalendar) {
 
-    //This creates variables for room calendars
-    const budgetCalendar = document.getElementById("budget-room");
-    const standardCalendar = document.getElementById("standard-room");
-    const luxuryCalendar = document.getElementById("luxury-room");
+    // Click event listeners to buttons for calendar
+    roomCalendarButton.addEventListener('click', () => {
+        hideAllCalendars();
+        roomCalendar.style.display = 'block';
+    });
 
-    // Initially hide all rooms
+    // Click event listeners to buttons from room
+    checkDateButton.addEventListener('click', () => {
+        hideAllCalendars();
+        calendar.scrollIntoView({behavior: 'smooth'});
+        roomCalendar.style.display = 'block';
+    });
+}
+
+// Event listeners for all room types
+showCalendar(budgetCalendarButton, budgetCheckDateButton, budgetCalendar);
+showCalendar(standardCalendarButton, standardCheckDateButton, standardCalendar);
+showCalendar(luxuryCalendarButton, luxuryCheckDateButton, luxuryCalendar);
+
+
+// This shows the calendar the selected room
+roomSelect.addEventListener('change', () => {
     hideAllCalendars();
-
-    //Create buttons in room view
-    const budgetButton = document.getElementById("budget-button");
-    const standardButton = document.getElementById("standard-button");
-    const luxuryButton = document.getElementById("luxury-button");
-
-
-    // Create buttons in calendar
-    const budgetCalendarButton = document.getElementById("budget-calendar-button");
-    const standardCalendarButton = document.getElementById("standard-calendar-button");
-    const luxuryCalendarButton = document.getElementById("luxury-calendar-button");
-
-    //Creates variable for select room
-    const roomSelect = document.getElementById('hotel-rooms');
-
-    // Function to hide all rooms
-    // function hideAllCalendars() {
-    //     budgetCalendar.style.display = 'none';
-    //     standardCalendar.style.display = 'none';
-    //     luxuryCalendar.style.display = 'none';
-    // }
-
-    // Add click event listeners to buttons for calendar
-    budgetCalendarButton.addEventListener('click', () => {
-        hideAllCalendars();
+    const selectedValue = roomSelect.value;
+    
+    // Show appropriate calendar based on room
+    if (selectedValue === '1') {
         budgetCalendar.style.display = 'block';
-    });
-
-    standardCalendarButton.addEventListener('click', () => {
-        hideAllCalendars();
+    } else if (selectedValue === '2') {
         standardCalendar.style.display = 'block';
-    });
-
-    luxuryCalendarButton.addEventListener('click', () => {
-        hideAllCalendars();
+    } else if (selectedValue === '3') {
         luxuryCalendar.style.display = 'block';
-    });
+    }
+});
 
 
-    // Add click event listeners to buttons from room
-    budgetButton.addEventListener('click', () => {
-        hideAllCalendars();
-        document.getElementById("calendar").scrollIntoView({behavior: 'smooth'});
-        budgetCalendar.style.display = 'block';
-    });
 
-    standardButton.addEventListener('click', () => {
-        hideAllCalendars();
-        document.getElementById("calendar").scrollIntoView({behavior: 'smooth'});
-        standardCalendar.style.display = 'block';
-    });
-
-    luxuryButton.addEventListener('click', () => {
-        hideAllCalendars();
-        document.getElementById("calendar").scrollIntoView({behavior: 'smooth'});
-        luxuryCalendar.style.display = 'block';
-    });
-
-    //This shows calendars on change of rooms in dropdown menu
-    roomSelect.addEventListener('change', () => {
-        hideAllCalendars();
-        if(roomSelect.value == '1') {
-            hideAllCalendars();
-            budgetCalendar.style.display = 'block';
-        } 
-        if (roomSelect.value == '2') {
-            hideAllCalendars();
-            standardCalendar.style.display = 'block';
-        } 
-        
-        if (roomSelect.value == '3') {
-            hideAllCalendars();
-            luxuryCalendar.style.display = 'block';
-        }
-    })
-
+/* This function moves to hotel-booking view when the Book room button is pressed for each room*/
+function moveToBooking(roomCalendar, value) {
+    hideAllCalendars();
+        roomSelect.value = `${value}`;
+        roomSelect.dispatchEvent(new Event('change'));
+        hotelBooking.scrollIntoView({behavior: 'smooth'});
+        roomCalendar.style.display = 'block';
 }
 
-showCalendar();
+//This adds event listeners to the different Book Room buttons
+budgetBookRoomButton.addEventListener('click', () => moveToBooking(budgetCalendar, 1));
+standardBookRoomButton.addEventListener('click', () => moveToBooking(standardCalendar, 2));
+luxuryBookRoomButton.addEventListener('click', () => moveToBooking(luxuryCalendar, 3));
 
-function moveToBooking() {
-    const roomSelect = document.getElementById('hotel-rooms');
-    const budgetCalendar = document.getElementById("budget-room");
-    const standardCalendar = document.getElementById("standard-room");
-    const luxuryCalendar = document.getElementById("luxury-room");
+introAtmButton.addEventListener('click', () => {
+    atm.scrollIntoView({behavior: 'smooth'});
+})
 
-
-    const budgetBookingButton = document.getElementById("budget-booking-button");
-    budgetBookingButton.addEventListener('click', () => {
-        roomSelect.value = '1';
-        roomSelect.dispatchEvent(new Event('change'));
-        document.getElementById("hotel-booking").scrollIntoView({behavior: 'smooth'});
-        hideAllCalendars();
-        budgetCalendar.style.display = 'block';
-        
-    })
-
-    const standardBookingButton = document.getElementById("standard-booking-button");
-    standardBookingButton.addEventListener('click', () => {
-        roomSelect.value = '2';
-        roomSelect.dispatchEvent(new Event('change'));
-        document.getElementById("hotel-booking").scrollIntoView({behavior: 'smooth'});
-        hideAllCalendars();
-        standardCalendar.style.display = 'block';
-        
-    })
-
-    const luxuryBookingButton = document.getElementById("luxury-booking-button");
-    luxuryBookingButton.addEventListener('click', () => {
-        roomSelect.value = '3';
-        roomSelect.dispatchEvent(new Event('change'));
-        document.getElementById("hotel-booking").scrollIntoView({behavior: 'smooth'});
-        hideAllCalendars();
-        luxuryCalendar.style.display = 'block';
-        
-    })
-}
-
-moveToBooking();    
+introBookNowButton.addEventListener('click', () => {
+    hotelBooking.scrollIntoView({behavior: 'smooth'});
+})
