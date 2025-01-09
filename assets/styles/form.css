@@ -6,6 +6,7 @@
     width: 100%;
     align-items: flex-start;
     gap: 2rem;
+    padding: 3.125rem 0rem;
 }
 
 /* Styling for the booking form */
@@ -55,7 +56,6 @@ fieldset#transfer-code-fieldset {
 
 fieldset {
     max-width: 100%;
-    overflow: scroll;
 }
 
 fieldset legend {
