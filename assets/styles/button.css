@@ -39,3 +39,8 @@ section#hotel-booking button {
 .room-buttons a {
     text-decoration: none;
 }
+
+#intro-book-now-button, #intro-atm-button {
+    margin-top: 3.25rem;
+    font-size: 1.5rem;
+}
