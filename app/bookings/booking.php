@@ -6,8 +6,9 @@ require '../autoload.php';
 
 session_start();
 
+if (isset($_POST['hotel-booking-submit'])) {
 $bookingData = getBookingData($_POST);
-
+}
 
 $availability = checkAvailability($bookingData);
 
