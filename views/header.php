@@ -93,4 +93,7 @@
                 Hotel de Pierrot is a hotel for the most discerning of clowns. Situated in the rolling valleys on Clown island, we’re far away from anything and everything that would disturb your clown sleep.</p>
 
             <p>Bring your clown friends to have a refreshing, yet quirky stay in one of our three rooms. We’ve got something for everyone!</p>
+
+            <div class="room-buttons"><button id="intro-atm-button">Get transfercode</button><button id="intro-book-now-button">Book now</button></div>
         </section>
+        <hr>
