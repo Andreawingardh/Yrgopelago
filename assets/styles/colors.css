@@ -13,17 +13,13 @@ h1 {
 h2 {
     color: var(--secondary-color);
 }
-nav {
-    background-color: rgb(231, 231, 231, 0.7);
 
-}
-
-nav a {
+a {
     color: var(--white);
     border-color: var(--secondary-color);
 }
 
-nav a:visited {
+a:visited {
     color: var(--primary-color);
 }
 
