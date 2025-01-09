@@ -1,14 +1,9 @@
-<?php
 
-declare(strict_types=1);
-
-
-
-?>
 <section id="atm">
-    <h2>Want to make a withdrawal?</h2>
+    <h2>Get your transfercode here!</h2>
     <p>Here at Hotel de Pierrot we make it easy for you to get the money you need to book a room. The money is only a click away!</p>
-    <form id="withdraw-form" action="/clown-island/index.php#atm" method="post">
+    <p></p>
+    <form id="withdraw-form" action="<?php BASE_URL?>/index.php#atm" method="post">
         <fieldset>
             <legend>Name:</legend>
             <input type="text" name="user" label="user"></input>
@@ -30,9 +25,10 @@ declare(strict_types=1);
     ?>
             <p class="withdrawal">Your transfercode: <?= $withdrawResult['transferCode']; ?><br>
                 Your amount: <?= $withdrawResult['amount']; ?></p>
+                <p>Your transfercode and name have been entered into the booking form!</p>
     <?php
-            unset($withdrawResult);
-            $_POST = [];
+            // unset($withdrawResult);
+            // $_POST = [];
         } else if (!isset($withdrawResult['transferCode'])) {
             foreach ($_SESSION['messages'] as $error) {
                 echo 'Error: ' . $error . ' Please try again.';
@@ -41,3 +37,4 @@ declare(strict_types=1);
     }
     ?>
 </section>
+<hr>
