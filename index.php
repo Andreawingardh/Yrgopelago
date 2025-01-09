@@ -1,21 +1,17 @@
 <?php
 
 declare(strict_types=1);
-require __DIR__ . '/app/autoload.php';
-require __DIR__ . '/vendor/autoload.php';
-// session_start();
+require_once __DIR__ . '/app/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-?>
+require_once __DIR__ . '/views/header.php';
 
+require_once __DIR__ . '/views/rooms.php';
 
-<?php
-require __DIR__ . '/views/header.php'; ?>
-<hr>
-<?php require __DIR__ . '/views/rooms.php'; ?>
-<hr>
-<?php require __DIR__ . '/views/atm.php'; ?>
-<hr>
-<?php require __DIR__ . '/views/form.php'; ?>
-<hr>
-<?php require __DIR__ . '/views/footer.php';
-?>
+require_once __DIR__ . '/views/atm.php';
+
+require_once __DIR__ . '/views/form.php'; 
+
+require_once __DIR__ . '/views/calendar.php';
+
+require_once __DIR__ . '/views/footer.php';
