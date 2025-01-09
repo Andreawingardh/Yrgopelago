@@ -30,6 +30,9 @@ function withdrawTransferCode(array $formData): array
         $body = $res->getBody();
         $stringBody = (string) $body;
         $withdrawResult = json_decode($stringBody, true);
+        $_SESSION['messages']['transferCode'] = $withdrawResult['transferCode'];
+        $_SESSION['messages']['user'] = $user;
+        $_SESSION['messages']['amount'] = $amount;
         return $withdrawResult;
     } catch (ClientException $e) {
         /* If the fetch returns an error response, this code gets the contents of the response and adds it to $_SESSION['messages'] */
