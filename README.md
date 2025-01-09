@@ -158,7 +158,7 @@ $acceptedSets: [
         - [x] Figure out how to show total cost before form is submitted. Javascript?? **Week 2**
     - [ ] 
 ### CSS
-- [ ] Look into scroll issues
+- [x] Look into scroll issues
 
 ### Javascript
 - [ ] Doublecheck the javascript functions
