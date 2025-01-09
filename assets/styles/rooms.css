@@ -3,6 +3,7 @@ section#hotel-rooms-description {
     flex-direction: column;
     align-items: flex-start;
     gap: 2.3125rem;
+    padding: 3.125rem 0rem;
 }
 
 #hotel-rooms-description article {
