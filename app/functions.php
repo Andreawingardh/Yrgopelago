@@ -40,8 +40,8 @@ function withdrawTransferCode(array $formData): array
         $errorContent = $response->getBody()->getContents();
 
         $errorMessage = json_decode($errorContent, true);
-        $_SESSION['messages']['error'] = $errorMessage['error'];
-        return $_SESSION['messages'];
+        $_SESSION['errors'][] = $errorMessage['error'];
+        return $_SESSION['errors'];
     }
 }
 
@@ -224,7 +224,7 @@ function depositTransferCode(string $transferCode): string
 
 
 /* This function sends the booking data to the database */
-function sendBookingData(array $bookingData)
+function sendBookingData(array $bookingData): void
 {
 
     $database = $bookingData['database'];
@@ -250,7 +250,6 @@ function sendBookingData(array $bookingData)
     /* This send the data to the table */
     $statement->execute();
 
-
     /* This selects the latest ID entered */
     $statement = $database->prepare("SELECT id
     FROM bookings
@@ -270,10 +269,11 @@ function sendBookingData(array $bookingData)
             $statement->execute();
         }
     }
+    return;
 }
 
 /* This function writes the data to a json-file and sends the user a link */
-function createJsonReceipt(array $bookingData)
+function createJsonReceipt(array $bookingData): callable
 {
     $database = $bookingData['database'];
     $features = $bookingData['features'] ?? [];
@@ -343,4 +343,5 @@ where room_id = :room_id;");
     $calendar->useMondayStartingDate();
 
     echo $calendar->draw(date('2025-01-01'));
+    return;
 }
