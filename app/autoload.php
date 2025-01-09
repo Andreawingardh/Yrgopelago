@@ -14,5 +14,5 @@ mb_internal_encoding('UTF-8');
 // Include the helper functions.
 require __DIR__ . '/functions.php';
 
-//Define base URL
+//Defines base URL
 define('BASE_URL', '');
