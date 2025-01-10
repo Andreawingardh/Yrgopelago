@@ -34,3 +34,22 @@ To create your own database, follow the instructions in [Database-queries.txt](/
 
 **Happy travels!**
 
+## Code review by Filip Lyrheden
+
+### General praise
+Overall very well organized file structure, with clear separation of concerns between views, styles, and functionality. And a cool and functional website as a result. Good work!
+
+### Javascript
+The script.js file has good and clear comments, but could use a little more structure, that would make it easier to separate functions and what parts of the Javascript-code are relevant for specific parts of the app. 
+
+I really like how scroll events are used for buttons. It makes it easy for the user to navigate, without the need for more pages and redirects. 
+
+### CSS and layout
+Consistent layout for colors and components. 
+The functionality of the calendar view is great, but it can be a bit hard for the user to at a glance separate available dates and occupied dates, since both are in different shades of red.
+
+### Backend
+Nice separation of booking flow logic and functions in different files. Maybe it could have been a good idea to split function.php into two or more files for easier readability? For example, the transfer code logic and functions could have been given their own file, to separate that from the booking and database functions. 
+
+
+
