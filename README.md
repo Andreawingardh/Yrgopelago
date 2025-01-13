@@ -28,6 +28,8 @@ Clone the repository on your local machine in an appropriate folder:
 Navigate to the folder:
 ```cd Yrgopelago ```
 
+Use composer require in the folder in the terminal to install the packages mentioned above.
+
 Start a local host in the folder and navigate to index.php to view the website.
 
 To create your own database, follow the instructions in [Database-queries.txt](/app/database/database-queries.txt).
@@ -53,3 +55,4 @@ Nice separation of booking flow logic and functions in different files. Maybe it
 
 
 
+Regarding your repo, I think you have described the rules of the assigned project in a clear and concise way. For anyone accessing your GitHub, it wouldn’t be difficult to understand the steps your website follows to correctly make bookings. At the same time, you show the API data that you needed to use in order to complete the steps for the proper functioning of the code on your website. A great example of the simplicity and pedagogical nature of your text is how you explain at the beginning what the hotel is and what it has to offer to customers. Good job!"
